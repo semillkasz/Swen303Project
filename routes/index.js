@@ -18,8 +18,7 @@ router.get('/', function(req, res, next) {
 /* GET search page. */
 router.get('/search', function(req, res) {
 	//Get the search string the user searched for.
-	var searchString = req.query.searchString;
-	search.search(res, searchString, database, pg);
+	search.search(req, res, database, pg);
 });
 
 module.exports = router;

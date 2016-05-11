@@ -15,6 +15,11 @@ block body
 							button.btn.btn-default(type="submit") Search
 	.container
 		h1= title
+		+dropdown("Sort by",[
+			{text:"Lowest to highest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=low"},
+			{text:"Highest to lowest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=high"}
+		])
+		br
 		.container
 			if listings != undefined && listings.length > 0
 				table.table.table-hover
