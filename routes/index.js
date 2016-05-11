@@ -18,7 +18,6 @@ router.get('/', function(req, res, next) {
 /* GET search page. */
 router.get('/search', function(req, res) {
 	//Get the search string the user searched for.
-	//NOTE: String has to be exact as the label in the database (will fix..)
 	var searchString = req.query.searchString;
 	search.search(res, searchString, database, pg);
 });

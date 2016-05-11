@@ -11,7 +11,7 @@ module.exports = {
 			}
 			console.log('Connected to database');
 			//Query the database for the item searched for
-			client.query("SELECT * FROM stock WHERE LOWER(label) = LOWER('"+searchString+"');", 
+			client.query("SELECT * FROM stock WHERE label ~* '"+searchString+"';", 
 			function(error, result){
 				done();
 				if(error){
