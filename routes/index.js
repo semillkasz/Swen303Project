@@ -15,16 +15,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-<<<<<<< HEAD
 /* GET search page. */
 router.get('/search', function(req, res) {
-	//Get the search string the user searched for.
 	search.search(req, res, database, pg);
-=======
+});
+	
 /* GET account page. */
 router.get('/account', function(req, res, next) {
   res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0'});
->>>>>>> Accounts
 });
 
 module.exports = router;
