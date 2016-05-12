@@ -1,0 +1,80 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title #{title}
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+  body(data-spy='scroll', data-target='.scrollspy')
+    .container
+      .masthead
+        h3 #{title}
+        .navbar-wrapper
+          nav.navbar.navbar-inverse.navbar-static-top
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                  span.sr-only Toggle navigation
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+              #navbar.navbar-collapse.collapse
+                ul.nav.navbar-nav.navbar-left
+                  li
+                    a(href='#fashion') Fashion
+                  li
+                    a(href='#electronics') Electronics
+                  li
+                    a(href='#electronics') Sports
+                  li
+                    a(href='#electronics') Daily Deals
+                ul.nav.navbar-nav.navbar-right
+                  li
+                    a(href='#profile') Profile
+                  li
+                    a(href='#cart') Shopping Cart
+                  li
+                    a(href='#logout') Logout
+                center
+                  form.navbar-form
+                    .form-group
+                      .input-group
+                        input.form-control(type='text')
+                        span.input-group-addon
+                          span.glyphicon.glyphicon-search
+        .row.featurette
+          .col-md-7.col-md-push-5
+            h2.featurette-heading #{fname} #{lname}
+            p.lead #{address}
+            p.lead #{rating}
+          .col-md-3.col-md-pull-5
+            img.featurette-image.img-responsive.center-block(src='images/pic.png')
+        .container-fluid
+          hr
+          .row
+            h4 Recently Bought
+            .col-lg-4
+            .col-lg-4
+            .col-lg-4
+          hr
+          .row
+            h4 Feedback
+            .col-lg-4
+            .col-lg-4
+            .col-lg-4
+          hr
+          .row
+            h4 Items for sale
+            .col-lg-4
+            .col-lg-4
+            .col-lg-4
+          hr
+          // Site footer
+          footer.footer
+            p © SWEN303 2016
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
