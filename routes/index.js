@@ -19,6 +19,11 @@ router.get('/', function(req, res, next) {
 router.get('/search', function(req, res) {
 	search.search(req, res, database, pg);
 });
+
+/* GET categories page. */
+router.get('/categories', function(req, res) {
+	res.render('categories', { title: 'SWEN Shop | Categories' });
+});
 	
 /* GET account page. */
 router.get('/account', function(req, res, next) {

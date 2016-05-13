@@ -1,0 +1,37 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+head
+	title= title
+block body
+	+navbar("SWEN Shop", "dropdown_menu")
+		+nav_item("/", "") Home
+		+nav_item("/categories", "active") Categories
+	.container
+		.row
+			.col-lg-6
+				form(action="/search", method="get")
+					.input-group
+						input.form-control(type="text", name="searchString", placeholder='Search for items..')
+						span.input-group-btn
+							button.btn.btn-default(type="submit") Search
+	.container
+		h1= title
+		a(href='search?searchString=Furniture') Furniture
+		br
+		a(href='search?searchString=Clothes') Clothes
+		br
+		a(href='search?searchString=Animals') Animals
+		br
+		a(href='search?searchString=Board+Games') Board Games
+		br
+		a(href='search?searchString=Plants') Plants
+		br
+		a(href='search?searchString=Food+and+Drinks') Food and Drinks
+		br
+		a(href='search?searchString=Kitchen+Appliances') Kitchen Appliances
+		br
+		a(href='search?searchString=Electronics') Electronics
+		br
+		a(href='search?searchString=Miscellaneous') Miscellaneous
+		br
+		

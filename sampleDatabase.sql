@@ -63,7 +63,8 @@ CREATE TABLE stock (
     uid integer,
     label character varying(100),
     price numeric(10,4),
-    quantity integer
+    quantity integer,
+	category character varying(100)
 );
 
 
@@ -173,25 +174,25 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY stock (sid, uid, label, price, quantity) FROM stdin;
-1	1	Camera	12.9000	3
-2	1	Hat	30.0000	1
-3	2	Bald Eagle	999.9900	10
-4	2	Kiwi	49999.9900	3
-5	3	Snakes and Ladders	1.0000	1
-6	3	Monopoly	3.0000	1
-7	4	Holy Grail	0.9900	1
-8	5	Meaning of Life	42.0000	20
-9	5	Cactus	9.9900	3
-10	5	Iris	9.9900	15
-11	6	Knives	15.5000	4
-12	6	Sword	49.9700	8
-13	7	Kryptonite	0.5000	100
-14	7	S Clothing Patch	5.9900	1000
-15	8	Table	10.0000	1
-16	9	Small Chair	5.0000	1
-17	10	Coffee	4.9900	10
-18	10	Muffin	3.5000	10
+COPY stock (sid, uid, label, price, quantity, category) FROM stdin;
+1	1	Camera	12.9000	3	Electronics
+2	1	Hat	30.0000	1	Clothes
+3	2	Bald Eagle	999.9900	10	Animals
+4	2	Kiwi	49999.9900	3	Animals
+5	3	Snakes and Ladders	1.0000	1	Board Games
+6	3	Monopoly	3.0000	1	Board Games
+7	4	Holy Grail	0.9900	1	Miscellaneous
+8	5	Meaning of Life	42.0000	20	Miscellaneous
+9	5	Cactus	9.9900	3	Plants
+10	5	Iris	9.9900	15	Plants
+11	6	Knives	15.5000	4	Kitchen Appliances
+12	6	Sword	49.9700	8	Miscellaneous
+13	7	Kryptonite	0.5000	100	Miscellaneous
+14	7	S Clothing Patch	5.9900	1000	Clothes
+15	8	Table	10.0000	1	Furniture
+16	9	Small Chair	5.0000	1	Furniture
+17	10	Coffee	4.9900	10	Food and Drinks
+18	10	Muffin	3.5000	10	Food and Drinks
 \.
 
 

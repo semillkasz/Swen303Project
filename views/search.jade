@@ -5,6 +5,7 @@ head
 block body
 	+navbar("SWEN Shop", "dropdown_menu")
 		+nav_item("/", "") Home
+		+nav_item("/categories", "") Categories
 	.container
 		.row
 			.col-lg-6
@@ -34,3 +35,4 @@ block body
 							td #{item.quantity}
 			else
 				+alert-info("No results found")
+				

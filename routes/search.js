@@ -10,13 +10,39 @@ module.exports = {
 				return;
 			}
 			console.log('Connected to database');
+
 			var searchString = req.query.searchString;
+			var categoryResults = [];
+			
+			//Query the datebase by category
+			client.query("SELECT * FROM stock WHERE category ~* '"+searchString+"';", 
+			function(error, result){
+				catagoryResults = result.rows;
+			});
+			
 			//Query the database for the item searched for
 			client.query("SELECT * FROM stock WHERE label ~* '"+searchString+"';", 
 			function(error, result){
 				done();
-				var listings = result.rows;
-				var sort = req.query.sort;
+				var searchResults = result.rows;
+				//Merge the category and search results together
+				var results = searchResults.concat(catagoryResults);
+				
+				//Remove duplicates
+				var listings = [];
+				var lookupMap = {};
+				
+				//Add each item to the lookup map by its sid
+				for(var i in results){
+					lookupMap[results[i].sid] = results[i];
+				}
+				
+				//Add every item to the listings from the sid map (ensures no duplicates)
+				for(i in lookupMap){
+					listings.push(lookupMap[i]);
+				}
+				
+				var sort = req.query.sort; //Can be undefined
 				if(error){
 					console.error('Failed to execute query');
 					console.error(error);
