@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var search = require('../routes/search');
+var listings = require('../routes/listings');
 var pg = require('pg').native;
 
 /*
@@ -23,6 +24,15 @@ router.get('/search', function(req, res) {
 /* GET categories page. */
 router.get('/categories', function(req, res) {
 	res.render('categories', { title: 'SWEN Shop | Categories' });
+});
+
+/* GET create listings page. */
+router.get('/createlisting', function(req, res) {
+	res.render('createlisting', { title: 'SWEN Shop | create listing' });
+});
+	
+router.post('/createlisting', function(req, res) {
+	listings.create(req, res, database, pg);
 });
 	
 /* GET account page. */

@@ -1,0 +1,29 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+head
+	title= title
+block body
+	+navbar("SWEN Shop", "dropdown_menu")
+		+nav_item("/", "") Home
+		+nav_item("/categories", "") Categories
+	.container
+		.row
+			.col-lg-6
+				form(action="/search", method="get")
+					.input-group
+						input.form-control(type="text", name="searchString", placeholder='Search for items..')
+						span.input-group-btn
+							button.btn.btn-default(type="submit") Search
+	.container
+		h1= title
+		form(action='/createlisting', method='post')
+			input(type="text", name="label", placeholder="Listing name")
+			br
+			input(type="text", name="price", placeholder="Price")
+			br
+			input(type="text", name="quantity", placeholder="Quantity")
+			br
+			input(type="text", name="category", placeholder="Category")
+			br
+			button.btn.btn-default(type="submit") Create listing
+				
