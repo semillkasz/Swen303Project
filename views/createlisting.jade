@@ -6,6 +6,7 @@ block body
 	+navbar("SWEN Shop", "dropdown_menu")
 		+nav_item("/", "") Home
 		+nav_item("/categories", "") Categories
+		+nav_item("/createlisting", "active") Create a listing
 	.container
 		.row
 			.col-lg-6
@@ -16,6 +17,8 @@ block body
 							button.btn.btn-default(type="submit") Search
 	.container
 		h1= title
+		if reportMsg != undefined
+			+alert-info(reportMsg)
 		form(action='/createlisting', method='post')
 			input(type="text", name="label", placeholder="Listing name")
 			br
