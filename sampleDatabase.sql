@@ -65,7 +65,7 @@ CREATE TABLE stock (
 	quantity integer,
 	category character varying(100),
 	photourl character varying(200), 
-	description character varying(200)
+	description character varying(500)
 );
 
 
@@ -177,14 +177,14 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 
 COPY stock (sid, label, price, quantity, category, photourl, description) FROM stdin;
 1	Camera	12.9000	3	Electronics	http://www.bhphotovideo.com/images/categoryImages/desktop/325x325/21008-Mirrorless-System-Cameras.jpg	Boasting a durable waterproof casing, built-in Wi-Fi and a variety of shooting modes, the Camera is the ultimate shooting companion on your next big holiday.
-2	Hat	30.0000	1	Clothes	 	 
-3	Bald Eagle	999.9900	10	Animals	 	 
-4	Kiwi	49999.9900	3	Animals	 	 
-5	Snakes and Ladders	1.0000	1	Board Games	 	 
-6	Monopoly	3.0000	1	Board Games	 	 
-7	Holy Grail	0.9900	1	Miscellaneous	 	 
-8	Meaning of Life	42.0000	20	Miscellaneous	 	 
-9	Cactus	9.9900	3	Plants	 	 
+2	Cap	30.0000	1	Clothes	http://cdn.shopify.com/s/files/1/0978/9908/products/hb_darkside_5panelcap_b7987690-e036-406a-a972-a1b434b2122c_large.jpeg?v=1455079401	Keeping it simple, this cap is just what you need this summer. All about quality, comfort and timeless style, this varsity cap has an embroidered detail at the back.
+3	Bald Eagle	999.9900	10	Animals	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1	The Bald Eagle is an unforgettable animal. Its white head and tail, eight-foot wingspread, piercing eyes, massive hooked beak and powerful talons make it unmistakable among North American birds.
+4	Kiwi	49999.9900	3	Animals	http://www.namastenewzealand.com/wp-content/uploads/2015/08/Rotorua-Rainbow-Springs-Kiwi-Wildlife-Park-350x350.jpg	A flightless bird, about the size of a domestic chicken. Kiwis lay the largest egg in relation to their body size of any species of bird in the world.
+5	Snakes and Ladders	1.0000	1	Board Games	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw2951e8c7/hi-res/764054p.jpg?sw=325	This is the classic board game in 3-dimensions. Now when you land on a snake, your marble actually goes down tubes and slide for one or more levels. Livens up the game for everyone. The board is a bit of a construction project at first, and will not fit back in the box after it is setup, but it is a lot more interesting than the usual flat board.
+6	Monopoly	3.0000	1	Board Games	http://www.hasbro.com/common/productimages/en_US/93e901b16d4010148bf09efbf894f9d4/E275A053D56FE1124AA2AC1BEF6330E9.jpg	Travel the globe, without the jetlag! Buy up real estate while you travel the world of MONOPOLY. With millions of dollars at your disposal, use your MONOPOLY bank card to grab houses and hotels on six continents! Be a winner AND see the globe with the world’s most popular board game!
+7	Holy Grail	0.9900	1	Miscellaneous	http://www.funkleague.com/wp-content/uploads/2015/03/Holy-Grail-300x300.jpg	The Holy Grail is a dish, plate, stone or cup that is part of an important theme of Arthurian literature. According to legend, it has special powers and is designed to provide happiness, eternal youth and food in infinite abundance.
+8	Meaning of Life	42.0000	20	Miscellaneous	https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11176219_382128701990934_1983521442_n.jpg	Have you ever wondered what the meaning of life is? Well look no further! You can finally get all the answers you have been looking for. This is not available anywhere else, so buy now!
+9	Cactus	9.9900	3	Plants	http://www.womenofchina.cn/res/womenofchina/1301/i.jpg	From Mexico, it grows slowly to around 2 m high (may take a few hundred years!). Large scented yellow flowers in summer. Indoors only, in bright light.
 10	Iris	9.9900	15	Plants	 	 
 11	Knives	15.5000	4	Kitchen Appliances	 	 
 12	Sword	49.9700	8	Miscellaneous	 	 

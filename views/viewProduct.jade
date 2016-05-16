@@ -44,14 +44,17 @@ block body
            img(src='#{photoSRC}')
            #addCartBtn.col-sm-12
             button.btn.btn-default(action="") Add to Cart
+
           #productDetails.col-md-8
            h3 #{title} 
            h6 tags: #{category} 
            br
-           p  $#{price}
+           p  $#{price}  
+           p #{quantity}
+           br
            p  #{product_details} 
 
-           //Will do reviews later
+           //Will do reviews later?
   
 
     .navbar.navbar-default.navbar-fixed-bottom
