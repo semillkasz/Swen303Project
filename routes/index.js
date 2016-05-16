@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var search = require('../routes/search');
 var listings = require('../routes/listings');
+var accounts = require('../routes/accounts');
+
 var pg = require('pg').native;
 
 /*
@@ -9,7 +11,11 @@ var pg = require('pg').native;
 	is different. Will be eventually replaced with the postgres database
 	on ECS servers.
 */
-var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+
+//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+// var database = 'postgres://postgres:swen303@localhost:5432/303';
+// var connectionString = 'postgres://localhost/SWEN303';
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -48,8 +54,26 @@ router.post('/createlisting', function(req, res) {
 	
 /* GET account page. */
 router.get('/account', function(req, res, next) {
-  res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0'});
-});
+	pg.connect(connectionString, onConnect);
+	function onConnect(err, client, done) {
+		if (err) {
+			console.error(err);
+			process.exit(1);
+		}
+		else {
+			client.query("SELECT * FROM users;", function(error, result){
+			done();
+			if(error){
+				console.error('Failed to execute query');
+				console.error(error);
+				return;
+			}
+			var queryResult = JSON.stringify(result.rows);
+			res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0', info: queryResult});
+			console.log(result.rows);
+		});
+		};}
+	});
 
 router.get('/viewProduct', function(req, res, next) {
 	pg.connect(database, onConnect);
