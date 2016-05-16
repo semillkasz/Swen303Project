@@ -1,5 +1,119 @@
-extends layout
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Colenso Database   
+    // Bootstrap Core CSS
+    link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='stylesheets/modern-business.css', rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    //Sliers Style
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick-theme.css')
+    script(src='//code.jquery.com/jquery-1.11.0.min.js')
+    script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='javascripts/slick.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
 
-block content
-  h1= title
-  p Welcome to #{title}
+  body
+    // Navigation
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='index') Online Shop
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='search') Register
+            li
+              a(href='t') Login
+
+            li
+              a(href='l') Shopping Cart
+        // /.navbar-collapse
+      // /.container
+    // Header Carousel
+    
+    // Page Content
+    .container
+      // Features Section
+
+      .row
+        .col-lg-6
+          h2.page-header Categories
+          #pills
+            .col-lg-12
+                  ul.nav.nav-pills
+                    li.active
+                      a(data-toggle='pill', href='#home') Computers
+                    li
+                      a(data-toggle='pill', href='#menu1') Mobile Phones
+                    li
+                      a(data-toggle='pill', href='#menu2') Cameras
+                  .tab-content
+                      #home.tab-pane.fade.in.active
+                        p
+                        p PC
+                        p Apple
+                      #menu1.tab-pane.fade
+                        p
+                        p Samsung
+                        p Apple
+                      #menu2.tab-pane.fade
+                        p
+                        p DSLR
+                        p GoPro
+      .row
+        .col-lg-12
+          h2.page-header Featured Items
+          .dave
+              .slider-data
+                  .multiple-items(style='margin: auto; width: 100%;')
+                      -var a=0
+                      each val in slider_data
+                          -a++
+                          -var imageURL = slider_data[a-1];
+                          img(src= "" + imageURL)
+       .row
+        .col-lg-12
+          h2.page-header Top Selling Items
+          .dave
+              .slider-data
+                  .multiple-items(style='margin: auto; width: 100%;')
+                      -var a=0
+                      each val in slider_data
+                          -a++
+                          -var imageURL = slider_data[a-1];
+                          img(src= "" + imageURL)
+      // /.row
+      // Footer
+      footer
+        .row
+          .col-lg-12
+            p Copyright © David Newton 2016
+    // /.container
+    //SLICK SLIDER
+    script.
+      // Can also be used with $(document).ready()
+      $(document).ready(function(){
+      $('.multiple-items').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      variableWidth: true
+      });
+      });
