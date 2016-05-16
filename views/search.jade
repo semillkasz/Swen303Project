@@ -1,0 +1,39 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+head
+	title= title
+block body
+	+navbar("SWEN Shop", "dropdown_menu")
+		+nav_item("/", "") Home
+		+nav_item("/categories", "") Categories
+		+nav_item("/createlisting", "") Create a listing
+	.container
+		.row
+			.col-lg-6
+				form(action="/search", method="get")
+					.input-group
+						input.form-control(type="text", name="searchString", placeholder='Search for items..')
+						span.input-group-btn
+							button.btn.btn-default(type="submit") Search
+	.container
+		h1= title
+		+dropdown("Sort by",[
+			{text:"Lowest to highest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=low"},
+			{text:"Highest to lowest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=high"}
+		])
+		br
+		.container
+			if listings != undefined && listings.length > 0
+				table.table.table-hover
+					tr
+						th Item Name
+						th Price
+						th Stock
+					each item in listings
+						tr
+							td #{item.label}
+							td $ #{item.price}
+							td #{item.quantity}
+			else
+				+alert-info("No results found")
+				
