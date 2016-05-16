@@ -100,20 +100,14 @@ router.get('/viewProduct', function(req, res, next) {
   			var q = JSON.stringify(result.rows);
   			var queryResult = JSON.parse(q);
   			
-  			var l = queryResult[0].label;
-  			//var pDetails = queryResult[0].description;
-  			var pPrice = queryResult[0].price;
-  			//var pURL = queryResult[0].photourl;
+  			var p_label = queryResult[0].label;
+  			var p_details = queryResult[0].description;
+  			var p_price = queryResult[0].price;
+  			var p_url = queryResult[0].photourl;
   			var p_category = queryResult[0].category;
 
-  			//Testing
-  			console.log(result.rows);
-  			console.log("Label: ", l);
-  			console.log("Price: ", pPrice);
-  			// console.log("Photo URL: ", pURL);
-  			console.log("Tags: ", p_category);
   			// res.render('viewProduct', { title: l, price: pPrice, product_details: pDetails, photoSRC: pURL, p_tags: tags});
-  			res.render('viewProduct', { title: l, price: pPrice, p_tags: p_category});
+  			res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url});
   		}
   	});
 };}

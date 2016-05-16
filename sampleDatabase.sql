@@ -59,12 +59,13 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE stock (
-    sid integer NOT NULL,
-    uid integer,
-    label character varying(100),
-    price numeric(10,4),
-    quantity integer,
-	category character varying(100)
+	sid integer NOT NULL,
+	label character varying(100),
+	price numeric(10,2),
+	quantity integer,
+	category character varying(100),
+	photourl character varying(200), 
+	description character varying(200)
 );
 
 
@@ -73,11 +74,11 @@ CREATE TABLE stock (
 --
 
 CREATE SEQUENCE stock_sid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -92,10 +93,10 @@ ALTER SEQUENCE stock_sid_seq OWNED BY stock.sid;
 --
 
 CREATE TABLE transactions (
-    tid integer NOT NULL,
-    sid integer,
-    uid integer,
-    type character varying(10)
+	tid integer NOT NULL,
+	sid integer,
+	uid integer,
+	type character varying(10)
 );
 
 
@@ -104,11 +105,11 @@ CREATE TABLE transactions (
 --
 
 CREATE SEQUENCE transactions_tid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -123,10 +124,10 @@ ALTER SEQUENCE transactions_tid_seq OWNED BY transactions.tid;
 --
 
 CREATE TABLE users (
-    uid integer NOT NULL,
-    username character varying(50),
-    realname character varying(100),
-    password character varying(50)
+	uid integer NOT NULL,
+	username character varying(50),
+	realname character varying(100),
+	password character varying(50)
 );
 
 
@@ -135,11 +136,11 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_uid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -174,25 +175,25 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY stock (sid, uid, label, price, quantity, category) FROM stdin;
-1	1	Camera	12.9000	3	Electronics
-2	1	Hat	30.0000	1	Clothes
-3	2	Bald Eagle	999.9900	10	Animals
-4	2	Kiwi	49999.9900	3	Animals
-5	3	Snakes and Ladders	1.0000	1	Board Games
-6	3	Monopoly	3.0000	1	Board Games
-7	4	Holy Grail	0.9900	1	Miscellaneous
-8	5	Meaning of Life	42.0000	20	Miscellaneous
-9	5	Cactus	9.9900	3	Plants
-10	5	Iris	9.9900	15	Plants
-11	6	Knives	15.5000	4	Kitchen Appliances
-12	6	Sword	49.9700	8	Miscellaneous
-13	7	Kryptonite	0.5000	100	Miscellaneous
-14	7	S Clothing Patch	5.9900	1000	Clothes
-15	8	Table	10.0000	1	Furniture
-16	9	Small Chair	5.0000	1	Furniture
-17	10	Coffee	4.9900	10	Food and Drinks
-18	10	Muffin	3.5000	10	Food and Drinks
+COPY stock (sid, label, price, quantity, category, photourl, description) FROM stdin;
+1	Camera	12.9000	3	Electronics	http://www.bhphotovideo.com/images/categoryImages/desktop/325x325/21008-Mirrorless-System-Cameras.jpg	Boasting a durable waterproof casing, built-in Wi-Fi and a variety of shooting modes, the Camera is the ultimate shooting companion on your next big holiday.
+2	Hat	30.0000	1	Clothes	 	 
+3	Bald Eagle	999.9900	10	Animals	 	 
+4	Kiwi	49999.9900	3	Animals	 	 
+5	Snakes and Ladders	1.0000	1	Board Games	 	 
+6	Monopoly	3.0000	1	Board Games	 	 
+7	Holy Grail	0.9900	1	Miscellaneous	 	 
+8	Meaning of Life	42.0000	20	Miscellaneous	 	 
+9	Cactus	9.9900	3	Plants	 	 
+10	Iris	9.9900	15	Plants	 	 
+11	Knives	15.5000	4	Kitchen Appliances	 	 
+12	Sword	49.9700	8	Miscellaneous	 	 
+13	Kryptonite	0.5000	100	Miscellaneous	 	 
+14	S Clothing Patch	5.9900	1000	Clothes	 	 
+15	Table	10.0000	1	Furniture	 	 
+16	Small Chair	5.0000	1	Furniture	 	 
+17	Coffee	4.9900	10	Food and Drinks	 	 
+18	Muffin	3.5000	10	Food and Drinks	 	 
 \.
 
 
