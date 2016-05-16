@@ -51,4 +51,48 @@ router.get('/account', function(req, res, next) {
   res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0'});
 });
 
+router.get('/viewProduct', function(req, res, next) {
+	pg.connect(database, onConnect);
+
+	function onConnect(err, client, done) {
+
+  	if (err) {
+  		done();
+    	console.error(err);
+    	process.exit(1);
+  	}
+
+	else {
+
+		client.query("SELECT * FROM stock WHERE sid = 1;", function(error, result){
+
+		done();
+		if(error){
+			console.error('Failed to execute query');
+			console.error(error);
+			return;
+		}
+  		else {
+  			var q = JSON.stringify(result.rows);
+  			var queryResult = JSON.parse(q);
+  			
+  			var l = queryResult[0].label;
+  			//var pDetails = queryResult[0].description;
+  			var pPrice = queryResult[0].price;
+  			//var pURL = queryResult[0].photourl;
+  			var p_category = queryResult[0].category;
+
+  			//Testing
+  			console.log(result.rows);
+  			console.log("Label: ", l);
+  			console.log("Price: ", pPrice);
+  			// console.log("Photo URL: ", pURL);
+  			console.log("Tags: ", p_category);
+  			// res.render('viewProduct', { title: l, price: pPrice, product_details: pDetails, photoSRC: pURL, p_tags: tags});
+  			res.render('viewProduct', { title: l, price: pPrice, p_tags: p_category});
+  		}
+  	});
+};}
+}); 
+
 module.exports = router;

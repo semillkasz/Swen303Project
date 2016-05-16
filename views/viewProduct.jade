@@ -1,0 +1,60 @@
+doctype html
+html
+head
+  meta(charset='utf-8')
+  title  Online Shopping System - Main Project
+
+  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+
+  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
+  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+
+  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+
+  link(rel='stylesheet', type='text/css', href='style.css')
+  script(language='Javascript', src='index.js')
+
+block body
+    .container-fluid
+      header
+        nav.navbar.navbar-default.navbar-fixed-top
+          .container
+            // Brand and toggle get grouped for better mobile display
+            .navbar-header
+              button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href="/") Online Shopping System
+            // Collect the nav links, forms, and other content for toggling
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+             ul.nav.navbar-nav
+              li
+               form.navbar-form.navbar-right(role='search', action = "/search", method = "get")
+                .form-group
+                 input.form-control(type='text', placeholder='Search', name = "searchMarkup")
+                button.btn.btn-default(type='submit') Search
+              li
+               form.navbar-form.navbar-right(action = "/login")
+                button.btn.btn-default Login
+      .container.text-justified
+        .row
+          #productImg.col-md-4
+           img(src='#{photoSRC}')
+           #addCartBtn.col-sm-12
+            button.btn.btn-default(action="") Add to Cart
+          #productDetails.col-md-8
+           h3 #{title} 
+           h6 tags: #{p_tags} 
+           br
+           p  $#{price}
+           //p  #{product_details} 
+
+           //Will do reviews later
+  
+
+    .navbar.navbar-default.navbar-fixed-bottom
+      .container
+        p.navbar-text.pull-left © Online Shopping System
+
