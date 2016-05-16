@@ -29,14 +29,14 @@ SET client_min_messages = warning;
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+-- CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
 
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+-- COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET search_path = public, pg_catalog;
@@ -45,9 +45,9 @@ SET search_path = public, pg_catalog;
 -- Name: plpgsql_call_handler(); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION plpgsql_call_handler() RETURNS language_handler
-    LANGUAGE c
-    AS '$libdir/plpgsql', 'plpgsql_call_handler';
+-- CREATE FUNCTION plpgsql_call_handler() RETURNS language_handler
+--     LANGUAGE c
+--     AS '$libdir/plpgsql', 'plpgsql_call_handler';
 
 
 SET default_tablespace = '';
@@ -266,10 +266,10 @@ SELECT pg_catalog.setval('users_uid_seq', 11, true);
 -- Name: public; Type: ACL; Schema: -; Owner: -
 --
 
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM pgsql;
-GRANT ALL ON SCHEMA public TO pgsql;
-GRANT ALL ON SCHEMA public TO PUBLIC;
+-- REVOKE ALL ON SCHEMA public FROM PUBLIC;
+-- REVOKE ALL ON SCHEMA public FROM pgsql;
+-- GRANT ALL ON SCHEMA public TO pgsql;
+-- GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
