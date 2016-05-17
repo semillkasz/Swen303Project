@@ -4,6 +4,8 @@ var search = require('../routes/search');
 var listings = require('../routes/listings');
 var accounts = require('../routes/accounts');
 var viewproduct = require('../routes/viewproduct');
+var cartAdd = require('../routes/cartAdd');
+var cartView = require('../routes/cartView');
 
 var pg = require('pg').native;
 
@@ -79,5 +81,14 @@ router.get('/account', function(req, res, next) {
 router.get('/viewProduct', function(req, res) {
 	viewproduct.view(req, res, database, pg);
 }); 
+
+router.post('/viewProduct', function(req, res){
+	cartAdd.add(req, res, database, pg);
+});
+
+/* GET shopping cart page */
+router.get('/shoppingCart', function(req, res){
+	cartView.view(req, res, database, pg);
+});
 
 module.exports = router;

@@ -12,7 +12,7 @@ module.exports = {
 			console.log('Connected to database');
 
 
-			client.query("SELECT * FROM stock WHERE sid = 9;", function(error, result){
+			client.query("SELECT * FROM stock WHERE sid = 18;", function(error, result){
 
   				var q = JSON.stringify(result.rows);
   				var queryResult = JSON.parse(q);
@@ -24,6 +24,7 @@ module.exports = {
   				var p_category = queryResult[0].category;
   				var p_quantity = queryResult[0].quantity;
 
+
   				//Testing
   				console.log(p_label);
   				console.log(p_details);
@@ -33,12 +34,15 @@ module.exports = {
   				console.log(p_quantity);
 
   				if (p_quantity <= 5){
-  					res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, quantity: 'Only ' + p_quantity + ' left!'});
+  					res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, quantity: 'Only ' + p_quantity + ' left!', cartBtn: 'Add to Cart'});
   				}
   				else {
-  					res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url});
+  					res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Add to Cart'});
 				}
 			});
 		});
 	}
+
+
+
 }

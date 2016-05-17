@@ -54,6 +54,14 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE cart (
+	uid integer, 
+	sid integer, 
+	label character varying(100), 
+	price numeric(10,2)
+	-- quantity integer
+);
+
 --
 -- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -185,15 +193,15 @@ COPY stock (sid, label, price, quantity, category, photourl, description) FROM s
 7	Holy Grail	0.9900	1	Miscellaneous	http://www.funkleague.com/wp-content/uploads/2015/03/Holy-Grail-300x300.jpg	The Holy Grail is a dish, plate, stone or cup that is part of an important theme of Arthurian literature. According to legend, it has special powers and is designed to provide happiness, eternal youth and food in infinite abundance.
 8	Meaning of Life	42.0000	20	Miscellaneous	https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11176219_382128701990934_1983521442_n.jpg	Have you ever wondered what the meaning of life is? Well look no further! You can finally get all the answers you have been looking for. This is not available anywhere else, so buy now!
 9	Cactus	9.9900	3	Plants	http://www.womenofchina.cn/res/womenofchina/1301/i.jpg	From Mexico, it grows slowly to around 2 m high (may take a few hundred years!). Large scented yellow flowers in summer. Indoors only, in bright light.
-10	Iris	9.9900	15	Plants	 	 
-11	Knives	15.5000	4	Kitchen Appliances	 	 
-12	Sword	49.9700	8	Miscellaneous	 	 
-13	Kryptonite	0.5000	100	Miscellaneous	 	 
-14	S Clothing Patch	5.9900	1000	Clothes	 	 
-15	Table	10.0000	1	Furniture	 	 
-16	Small Chair	5.0000	1	Furniture	 	 
-17	Coffee	4.9900	10	Food and Drinks	 	 
-18	Muffin	3.5000	10	Food and Drinks	 	 
+10	Iris	9.9900	15	Plants	http://www.touchofnature.com/Fall%20Pictures/TC%20Dutch%20Iris%20Blue%20Ribbon.png	The word iris is Greek for 'rainbow'. The iris flower meaning are faith, wisdom, peace of mind, friendship and hope. Purple iris is symbolic of wisdom and compliments
+11	Knives	15.5000	4	Kitchen Appliances	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg	Set of 5 quality kitchen knives complete with a magnetic wall rack for easy accessability. Each knife is made from top quality, strong stainless steel and features riveted handles.
+12	Sword	49.9700	8	Miscellaneous	http://www.bilttuff.com/images/Butterfly%20Swords.jpg	Butterfly Swords come in pairs that are cleverly nested together so they appear to be one sword not two. When they are drawn, they can be quickly separated and wielded in both hands to make wickedly effective chops, slashes and thrusts.
+13	Kryptonite	0.5000	100	Miscellaneous	http://www.fashion-fit.us/ff2016_files/image048.jpg	Kryptonite is a material from the superman fictional universe, specifically the ore form of a radioactive element from Krypton, the home planet of Superman.
+14	Scarf	5.9900	1000	Clothes	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg	This scarf is the perfect accessory to keep you warm this Winter. It folds up small but keeps you warm on those cold days.
+15	Table	10.0000	1	Furniture	http://www.camlenantiques.com/images/bist_325cab.jpg	Designed for a smaller space, this table has all of the design and functionality of a larger pedestal table, exuding a more casual style. This table can comfortably sit 2 or 3 persons, or can be used as an accent table in a living room or entrance hallway.
+16	Small Chair	5.0000	1	Furniture	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw828da71f/hi-res/991174p.jpg?sw=325	Small chair with slats. Made from lightweight beech wood. Easy to clean.
+17	Coffee Beans	4.9900	10	Food and Drinks	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg	Creamy and smooth with a nutty finish. Preaparation - washed. Sold in 500g packs.
+18	Muffin	3.5000	10	Food and Drinks	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/	Double chocolate chip muffins (4 pieces) filled with a gooey caramel center. Baked with no nuts.
 \.
 
 
