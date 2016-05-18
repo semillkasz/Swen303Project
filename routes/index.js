@@ -17,13 +17,10 @@ var pg = require('pg').native;
 */
 
 
-
-var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
-//var connectionString = 'postgres://localhost/SWEN303';
 //var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
+var database = 'postgres://postgres:swen303@localhost:5432/303';
+//var connectionString = 'postgres://localhost/SWEN303';
+
 
 
 /* GET home page. */
