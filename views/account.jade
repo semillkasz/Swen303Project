@@ -1,4 +1,5 @@
 doctype html
+<<<<<<< Updated upstream
 html
 head
   meta(charset='utf-8')
@@ -89,6 +90,50 @@ block body
                 .panel-body(style='padding-top:30px')
                   #login-alert.alert.alert-danger.col-sm-12(style='display:none')
                   form#loginform.form-horizontal(method='post' action='index')
+=======
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title #{title}
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+  body(data-spy='scroll', data-target='.scrollspy')
+    .container
+      .masthead
+        h3 #{title}
+        .navbar-wrapper
+          nav.navbar.navbar-inverse.navbar-static-top
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                  span.sr-only Toggle navigation
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+              #navbar.navbar-collapse.collapse
+                ul.nav.navbar-nav.navbar-left
+                  li
+                    a(href='#fashion') Fashion
+                  li
+                    a(href='#electronics') Electronics
+                  li
+                    a(href='#electronics') Sports
+                  li
+                    a(href='#electronics') Daily Deals
+                ul.nav.navbar-nav.navbar-right
+                  li
+                    a(href='account') Profile
+                  li
+                    a(href='shoppingCart') Shopping Cart
+                  li
+                    a(href='#logout') Logout
+                center
+                  form.navbar-form
+>>>>>>> Stashed changes
                     .form-group
                       label.col-md-4.control-label(for='username') Username
                       .col-md-7.col-md-offset-1
