@@ -31,16 +31,25 @@ block body
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
              ul.nav.navbar-nav
               li
-               form.navbar-form.navbar-right(role='search', action = "/search", method = "get")
-                .form-group
-                 input.form-control(type='text', placeholder='Search', name = "searchMarkup")
-                button.btn.btn-default(type='submit') Search
+                a(href='/categories') Categories
               li
-               form.navbar-form.navbar-right(action = "/login")
-                button.btn.btn-default Login
+                a(href='/createlisting') Create Listing
+              li
+                a(href='/account') Profile
               li
                form.navbar-form.navbar-right(action = "/shoppingCart")
-                button.btn.btn-default Shopping Cart
+                button.btn.btn-default Shopping Cart  
+              li
+               form.navbar-form.navbar-right(role='search', action = "/search", method = "get")
+                .form-group
+                 input.form-control(type='text', placeholder='Search', name = "searchString")
+                button.btn.btn-default(type='submit') Search
+              li
+               form.navbar-form.navbar-right(action = "#login")
+                button.btn.btn-default Login
+              li
+               form.navbar-form.navbar-right(action = "#signup")
+                button.btn.btn-default Sign Up 
       .container.text-center
         .row.content
           .col-sm-2.sidenav
@@ -58,9 +67,9 @@ block body
                       td #{item.label}
                       td $ #{item.price}
                       td #{item.quantity}
-                      td 
-                          form.navbar-form.navbar-right(action = "")
-                            button.btn.btn-default Delete
+                      td
+                        form(action='/shoppingCart', method='post') 
+                          button.btn.btn-default Delete
 
               else
                 br

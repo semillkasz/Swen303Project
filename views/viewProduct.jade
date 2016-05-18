@@ -31,16 +31,28 @@ block body
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
              ul.nav.navbar-nav
               li
-               form.navbar-form.navbar-right(role='search', action = "/search", method = "get")
-                .form-group
-                 input.form-control(type='text', placeholder='Search', name = "searchMarkup")
-                button.btn.btn-default(type='submit') Search
+                a(href='/categories') Categories
               li
-               form.navbar-form.navbar-right(action = "/login")
-                button.btn.btn-default Login
+                a(href='/createlisting') Create Listing
+              li
+                a(href='/account') Profile
               li
                form.navbar-form.navbar-right(action = "/shoppingCart")
-                button.btn.btn-default Shopping Cart
+                button.btn.btn-default Shopping Cart  
+              li
+               form.navbar-form.navbar-right(role='search', action = "/search", method = "get")
+                .form-group
+                 input.form-control(type='text', placeholder='Search', name = "searchString")
+                button.btn.btn-default(type='submit') Search
+              li(data-toggle='modal', data-target='#loginBox')
+                a(href='#login')
+                  span.ion.ion-person(style='margin-right:5px; font-size:120%;')
+                  | Login
+              li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
+                a
+                  span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
+                  | Sign Up
+
       .container.text-justified
         .row
           #productImg.col-md-4
@@ -59,7 +71,100 @@ block body
            p  #{product_details} 
 
            //Will do reviews later?
-  
+  // Forgot Password Box 
+    #forgotPasswordBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.fa.fa-key(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Forgot password
+          .modal-body
+            .form-group
+              label.control-label(for='email') Email:
+              input.form-control(type='text', placeholder='Email...', name='email')
+            .form-group
+              button.btn.btn-primary Submit
+
+    // Login Box         
+    #loginBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.ion.ion-person(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Login
+          .modal-body(style='height:400px !important;')
+            #loginbox.mainbox.col-md-12
+              .panel.panel-primary
+                .panel-heading
+                  .panel-title Sign In
+                  div(data-dismiss='modal', data-toggle='modal', data-target='#forgotPasswordBox', style='float:right; font-size: 80%; position: relative; top:-10px')
+                    a(href='#', style='color:white;') Forgot password?
+                .panel-body(style='padding-top:30px')
+                  #login-alert.alert.alert-danger.col-sm-12(style='display:none')
+                  form#loginform.form-horizontal(role='form')
+                    .input-group(style='margin-bottom: 25px')
+                      span.input-group-addon
+                        i.glyphicon.glyphicon-user
+                      input#login-username.form-control(type='text', name='username', value='', placeholder='username or email')
+                    .input-group(style='margin-bottom: 25px')
+                      span.input-group-addon
+                        i.glyphicon.glyphicon-lock
+                      input#login-password.form-control(type='password', name='password', placeholder='password')
+                    .form-group(style='margin-top:10px')
+                      // Button
+                      .col-sm-12.controls
+                        a#btn-login.btn.btn-success(href='/account') Login  
+                        a#btn-fblogin.btn.btn-primary(href='#') Login with Facebook
+                    .form-group
+                      .col-md-12.control
+                        div(style='border-top: 1px solid#888; padding-top:15px; font-size:85%')
+                          | No account? 
+                          a(href='#', data-dismiss='modal', data-toggle='modal', data-target='#signUpBox')
+                            | Sign Up Here
+
+    // Sign Up Box
+    #signUpBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Sign Up
+          .modal-body
+            form#registrationForm.form-horizontal(method='post' /*action='/account'*/)
+              .form-group
+                label.control-label.col-md-4(for='fname') First Name
+                .col-md-7.col-md-offset-1
+                  input#name1.form-control(type='text', name='fname', placeholder='Name...')
+              .form-group
+                label.control-label.col-md-4(for='lname') Surname
+                .col-md-7.col-md-offset-1
+                  input#last.form-control(type='text', name='lname', placeholder='Surname...')
+              .form-group
+                label.col-md-4.control-label(for='email') Email
+                .col-md-7.col-md-offset-1
+                  input#email.form-control(type='email', name='email', placeholder='Email...')
+              .form-group
+                label.col-md-4.control-label(for='pass') Password
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='password', name='pass', placeholder='Password...')
+              .form-group
+                label.col-md-4.control-label(for='imageURL') ImageURL
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='imageURL', name='imageURL', placeholder='Image URL')                  
+              .form-group
+                .col-md-7.col-md-offset-4
+                  a#btn-login.btn.btn-success(href='/account') Register 
+                  //button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit', href='/account') Register
+                  button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close  
 
     .navbar.navbar-default.navbar-fixed-bottom
       .container
