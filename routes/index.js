@@ -16,7 +16,7 @@ var pg = require('pg').native;
 */
 
 
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
 //var database = 'postgres://postgres:swen303@localhost:5432/303';
 // var connectionString = 'postgres://localhost/SWEN303';
 
@@ -27,19 +27,22 @@ var pg = require('pg').native;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	//var query = client.query("SELECT * FROM users"); 
-	var results = [];
-	results[0] = "images/1.jpg"
-	results[1] = "images/1.jpg"
-	results[2] = "images/2.jpg"
-	results[3] = "images/2.jpg"
-	results[4] = "images/3.jpg"
-	results[5] = "images/3.jpg"
+	pg.connect(database, function(err, client, done){
+			if(err){
+				console.error('Could not connect to the database');
+				console.error(err);
+				return;
+			}
+			console.log('Connected to database');
+			client.query("SELECT * FROM stock",
+			function(error, result){
+				done();
+				res.render('index',{slider_data: result.rows});	
+		    });
 
-	console.log(results);
-	res.render('index', {slider_data: results});
-
+	});
 }); 
+
 
 /* GET search page. */
 router.get('/search', function(req, res) {

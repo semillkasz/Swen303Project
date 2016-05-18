@@ -198,7 +198,7 @@ html(lang='en')
                       -var a=0
                       each val in slider_data
                           -a++
-                          -var imageURL = slider_data[a-1];
+                          -var imageURL = slider_data[a-1].photourl;
                           a(href='/viewProduct')
                               img(src= "" + imageURL)
        .row
@@ -210,7 +210,7 @@ html(lang='en')
                       -var a=0
                       each val in slider_data
                           -a++
-                          -var imageURL = slider_data[a-1];
+                          -var imageURL = slider_data[a-1].photourl;
                           a(href='/viewProduct')
                               img(src= "" + imageURL)
       .row
@@ -222,7 +222,7 @@ html(lang='en')
                       -var a=0
                       each val in slider_data
                           -a++
-                          -var imageURL = slider_data[a-1];
+                          -var imageURL = slider_data[a-1].photourl;
                           a(href='/viewProduct')
                               img(src= "" + imageURL)
       // /.row
