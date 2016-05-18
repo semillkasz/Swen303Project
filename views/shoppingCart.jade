@@ -3,7 +3,7 @@ html
 head
   meta(charset='utf-8')
   title  Online Shopping System - Main Project
-
+  link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
   link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
 
   link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
@@ -44,36 +44,129 @@ block body
                 .form-group
                  input.form-control(type='text', placeholder='Search', name = "searchString")
                 button.btn.btn-default(type='submit') Search
-              li
-               form.navbar-form.navbar-right(action = "#login")
-                button.btn.btn-default Login
-              li
-               form.navbar-form.navbar-right(action = "#signup")
-                button.btn.btn-default Sign Up 
-      .container.text-center
-        .row.content
-          .col-sm-2.sidenav
-          #content.col-sm-8.text-left
-            h1 #{title}
-            .container
-              if cart != undefined && cart.length > 0
-                table.table.table-hover
-                  tr
-                    th Item Name
-                    th Price
-                    th Quantity
-                  each item in cart
-                    tr
-                      td #{item.label}
-                      td $ #{item.price}
-                      td #{item.quantity}
-                      td
-                        form(action='/shoppingCart', method='post') 
-                          button.btn.btn-default Delete
+              li(data-toggle='modal', data-target='#loginBox')
+                a(href='#login')
+                  span.ion.ion-person(style='margin-right:5px; font-size:120%;')
+                  | Login
+              li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
+                a
+                  span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
+                  | Sign Up
+    // Forgot Password Box 
+    #forgotPasswordBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.fa.fa-key(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Forgot password
+          .modal-body
+            .form-group
+              label.control-label(for='email') Email:
+              input.form-control(type='text', placeholder='Email...', name='email')
+            .form-group
+              button.btn.btn-primary Submit
+                                
+    // Login Box         
+    #loginBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.ion.ion-person(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Login
+          .modal-body(style='height:400px !important;')
+            #loginbox.mainbox.col-md-12
+              .panel.panel-primary
+                .panel-heading
+                  .panel-title Sign In
+                  div(data-dismiss='modal', data-toggle='modal', data-target='#forgotPasswordBox', style='float:right; font-size: 80%; position: relative; top:-10px')
+                    a(href='#', style='color:white;') Forgot password?
+                .panel-body(style='padding-top:30px')
+                  #login-alert.alert.alert-danger.col-sm-12(style='display:none')
+                  form#loginform.form-horizontal(method='post' action='index')
+                    .form-group
+                      label.col-md-4.control-label(for='username') Username
+                      .col-md-7.col-md-offset-1
+                        input#pass.form-control(type='username', name='username', placeholder='Username')                   
+                    .form-group
+                      label.col-md-4.control-label(for='pass') Password
+                      .col-md-7.col-md-offset-1
+                        input#pass.form-control(type='password', name='pass', placeholder='Password...')
+                 
+                    .form-group
+                      .col-md-7.col-md-offset-4
+                        //a#btn-login.btn.btn-success(type='submit') Register 
+                        button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Login
+                        button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
 
-              else
-                br
-                p No items in Shopping Cart
+
+      // Sign Up Box
+    #signUpBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Sign Up
+          .modal-body
+            form#registrationForm.form-horizontal(method='post' action='signUp')
+              .form-group
+                label.control-label.col-md-4(for='fullname') Full Name
+                .col-md-7.col-md-offset-1
+                  input#name1.form-control(type='text', name='fname', placeholder='Full Name...')
+              .form-group
+                label.control-label.col-md-4(for='username') User Name
+                .col-md-7.col-md-offset-1
+                  input#last.form-control(type='text', name='username', placeholder='Username...')
+              .form-group
+                label.col-md-4.control-label(for='email') Email
+                .col-md-7.col-md-offset-1
+                  input#email.form-control(type='email', name='email', placeholder='Email...')
+              .form-group
+                label.col-md-4.control-label(for='pass') Password
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='password', name='pass', placeholder='Password...')
+              .form-group
+                label.col-md-4.control-label(for='imageURL') ImageURL
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='imageURL', name='imageURL', placeholder='Image URL')                  
+              .form-group
+                .col-md-7.col-md-offset-4
+                  //a#btn-login.btn.btn-success(type='submit') Register 
+                  button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
+                  button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
+    .container.text-center
+      .row.content
+        .col-sm-2.sidenav
+        #content.col-sm-8.text-left
+          h1 #{title}
+          .container
+            br
+            if cart != undefined && cart.length > 0
+              table.table.table-hover
+                tr
+                  th Item Name
+                  th Price
+                  th Quantity
+                each item in cart
+                  tr
+                    td #{item.label}
+                    td $ #{item.price}
+                    td #{item.quantity}
+                    td
+                      form(action='/shoppingCart', method='post') 
+                        button.btn.btn-default Delete
+
+            else
+              br
+              p No items in Shopping Cart
 
            
   
