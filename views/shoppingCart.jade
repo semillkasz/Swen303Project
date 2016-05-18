@@ -49,17 +49,22 @@ block body
             .container
               if cart != undefined && cart.length > 0
                 table.table.table-hover
-                tr
-                  th Item Name
-                  th Price
-                  //th Stock
-                each item in cart
                   tr
-                    td #{p_label}
-                    td $ #{p_price}
-                    //td #{p_quantity}
+                    th Item Name
+                    th Price
+                    th Quantity
+                  each item in cart
+                    tr
+                      td #{item.label}
+                      td $ #{item.price}
+                      td #{item.quantity}
+                      td 
+                          form.navbar-form.navbar-right(action = "")
+                            button.btn.btn-default Delete
+
               else
-                p No items in shopping cart
+                br
+                p No items in Shopping Cart
 
            
   

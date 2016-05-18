@@ -12,7 +12,7 @@ module.exports = {
 			console.log('Connected to database');
 
 
-			client.query("SELECT * FROM stock WHERE sid = 18;", function(error, result){
+			client.query("SELECT * FROM stock WHERE sid = 1;", function(error, result){
 
   				var q = JSON.stringify(result.rows);
   				var queryResult = JSON.parse(q);

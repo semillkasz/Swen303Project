@@ -3,7 +3,7 @@ module.exports = {
   /* 
     Create function to view items in shopping cart
   */
-  add: function(req, res, database, pg){
+  view: function(req, res, database, pg){
     pg.connect(database, function(err, client, done){
       if(err){
         console.error('Could not connect to the database');
@@ -12,32 +12,28 @@ module.exports = {
       }
       console.log('Connected to database');
 
-      client.query("SELECT * FROM stock WHERE sid = 18;", function(error, result){
+      client.query("SELECT * FROM cart WHERE uid = 1;", function(error, result){
 
-        var q = JSON.stringify(result.rows);
-        var queryResult = JSON.parse(q);
+        // var queryResult = JSON.stringify(result.rows);
+        // var queryResult = JSON.parse(q);
         
         //var u_id = current user
-        var p_id = queryResult[0].sid;
-        var p_label = queryResult[0].label;
-        var p_details = queryResult[0].description;
-        var p_price = queryResult[0].price;
-        var p_url = queryResult[0].photourl;
-        var p_category = queryResult[0].category;
-        var p_quantity = queryResult[0].quantity;
 
-        client.query("INSERT INTO cart (uid, sid, label, price) " +
-          "VALUES(1, '"+p_id+"', '"+p_label+"', '"+p_price+"');", 
-        function(error, result){
-          done();
-            if(error){
-              console.error('Failed to execute query');
-              console.error(error);
-            return;
-            }
-        res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Added to Cart'});
+        var queryResult = result.rows;
+        var cart = [];
+        var lookupMap = {};
+
+        for (var i in queryResult){
+          lookupMap[queryResult[i].sid] = queryResult[i];
+        }
+
+        for (i in lookupMap){
+          cart.push(lookupMap[i]);
+        }
+
+        res.render('shoppingCart', { title: 'Shopping Cart', cart: cart});
+        
       });
     });
-  });
-}
+  }
 }
