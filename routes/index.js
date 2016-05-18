@@ -3,6 +3,9 @@ var router = express.Router();
 var search = require('../routes/search');
 var listings = require('../routes/listings');
 var accounts = require('../routes/accounts');
+var viewproduct = require('../routes/viewproduct');
+var cartAdd = require('../routes/cartAdd');
+var cartView = require('../routes/cartView');
 
 var pg = require('pg').native;
 
@@ -12,9 +15,14 @@ var pg = require('pg').native;
 	on ECS servers.
 */
 
-var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+
+//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
 //var database = 'postgres://postgres:swen303@localhost:5432/303';
 // var connectionString = 'postgres://localhost/SWEN303';
+
+//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+//var database = 'postgres://postgres:swen303@localhost:5432/303';
+
 
 
 /* GET home page. */
@@ -68,55 +76,33 @@ router.get('/account', function(req, res, next) {
 				console.error(error);
 				return;
 			}
-			var queryResult = JSON.stringify(result.rows);
-			res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0', info: queryResult});
-			console.log(result.rows);
+			var qr = JSON.stringify(result.rows);
+			var queryResult = JSON.parse(qr);
+
+			var u_username = queryResult[2].username;
+  			var u_realname = queryResult[2].realname;
+  			var u_address = queryResult[2].address;
+  			var u_rating = queryResult[2].rating;
+  			var u_photo = queryResult[2].photo;
+
+			res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo});
+			console.log(result.rows);	
 		});
 		};}
 	});
 
-router.get('/viewProduct', function(req, res, next) {
-	pg.connect(database, onConnect);
-
-	function onConnect(err, client, done) {
-
-  	if (err) {
-  		done();
-    	console.error(err);
-    	process.exit(1);
-  	}
-
-	else {
-
-		client.query("SELECT * FROM stock WHERE sid = 1;", function(error, result){
-
-		done();
-		if(error){
-			console.error('Failed to execute query');
-			console.error(error);
-			return;
-		}
-  		else {
-  			var q = JSON.stringify(result.rows);
-  			var queryResult = JSON.parse(q);
-  			
-  			var l = queryResult[0].label;
-  			//var pDetails = queryResult[0].description;
-  			var pPrice = queryResult[0].price;
-  			//var pURL = queryResult[0].photourl;
-  			var p_category = queryResult[0].category;
-
-  			//Testing
-  			console.log(result.rows);
-  			console.log("Label: ", l);
-  			console.log("Price: ", pPrice);
-  			// console.log("Photo URL: ", pURL);
-  			console.log("Tags: ", p_category);
-  			// res.render('viewProduct', { title: l, price: pPrice, product_details: pDetails, photoSRC: pURL, p_tags: tags});
-  			res.render('viewProduct', { title: l, price: pPrice, p_tags: p_category});
-  		}
-  	});
-};}
+/* GET view product page. */
+router.get('/viewProduct', function(req, res) {
+	viewproduct.view(req, res, database, pg);
 }); 
+
+router.post('/viewProduct', function(req, res){
+	cartAdd.add(req, res, database, pg);
+});
+
+/* GET shopping cart page */
+router.get('/shoppingCart', function(req, res){
+	cartView.view(req, res, database, pg);
+});
 
 module.exports = router;

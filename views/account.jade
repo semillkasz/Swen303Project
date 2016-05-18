@@ -48,12 +48,12 @@ html(lang='en')
                           span.glyphicon.glyphicon-search
         .row.featurette
           .col-md-7.col-md-push-5
-            h2.featurette-heading #{fname} #{lname}
+            h2.featurette-heading #{realname}
             p.lead #{address}
-            p.lead #{rating}
+            p.lead #{rating}/5
             p #{info}
           .col-md-3.col-md-pull-5
-            img.featurette-image.img-responsive.center-block(src='images/pic.png')
+            img.featurette-image.img-responsive.center-block(src='#{photoSRC}')
         .container-fluid
           hr
           .row
