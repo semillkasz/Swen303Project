@@ -18,14 +18,11 @@ var pg = require('pg').native;
 
 
 
+var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+//var database = 'postgres://postgres:swen303@localhost:5432/303';
+//var connectionString = 'postgres://localhost/SWEN303';
 //var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
 //var database = 'postgres://postgres:swen303@localhost:5432/303';
-// var connectionString = 'postgres://localhost/SWEN303';
-
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
-
-
 //var database = 'postgres://postgres:swen303@localhost:5432/303';
 
 
@@ -46,7 +43,94 @@ router.get('/', function(req, res, next) {
 
 	});
 }); 
+router.get('/index', function(req, res, next) {
+	pg.connect(database, function(err, client, done){
+			if(err){
+				console.error('Could not connect to the database');
+				console.error(err);
+				return;
+			}
+			console.log('Connected to database');
+			client.query("SELECT * FROM stock",
+			function(error, result){
+				done();
+				res.render('index',{slider_data: result.rows});	
+		    });
 
+	});
+}); 
+
+router.post('/signUp', function(req, res, next) {
+	pg.connect(database, function(err, client, done){
+			if(err){
+				console.error('Could not connect to the database');
+				console.error(err);
+				return;
+			}
+			console.log('Connected to database');
+			
+			var fullName = req.body.fname;
+			var userName = req.body.username;
+			var password = req.body.pass;
+			var email = req.body.email;
+			var photoURL = req.body.imageURL;
+			
+			//Error check to make sure fields were filled in
+			if(fullName.length == 0 || userName.length == 0 || password.length == 0 || email.length == 0 || photoURL.length == 0){
+				console.log("Error length")
+				res.render('index', {reportMsg: 'Error: make sure all fields are filled in correctly.'});
+				return;
+			}
+			
+			
+			//Add the item to the users table
+			client.query("INSERT INTO users ( username, realname, password, email, photo) " +
+				"VALUES('"+userName+"', '"+fullName+"', '"+password+"', '"+email+"','"+photoURL+"');",
+			function(error, result){
+				done();
+				if(error){
+					console.error('Failed to execute query');
+					console.error(error);
+					return;
+				}
+				res.redirect('/');
+
+			});
+		});
+}); 
+
+
+router.post('/index', function(req, res, next) {
+	console.log("IM IN HERE NOW")
+	pg.connect(database, function(err, client, done){
+			if(err){
+				console.error('Could not connect to the database');
+				console.error(err);
+				return;
+			}
+			console.log('Connected to database');
+			
+			var username = req.body.username;
+			var password = req.body.password;
+
+			client.query("SELECT * FROM users",
+			function(error, result){
+				done();
+				for(var i = 0; i < result.rows.length; i++){
+					if(username = result.rows[i].username){
+						if(password = result.rows[i].password){
+							res.render('index', {user_id : result.rows[i].uid});
+							//res.redirect('/');
+							return;
+						}
+					}
+				}
+				console.log("FAILLLLLLLLLLLLLLLLL")
+			});
+
+	
+		});
+}); 
 
 /* GET search page. */
 router.get('/search', function(req, res) {

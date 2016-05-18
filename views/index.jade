@@ -24,47 +24,50 @@ html(lang='en')
 
   body
     // Navigation
-    .navbar-wrapper
-          nav.navbar.navbar-inverse.navbar-static-top
-            .container-fluid
-              .navbar-header
-                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-                  span.sr-only Toggle navigation
-                  span.icon-bar
-                  span.icon-bar
-                  span.icon-bar
-              #navbar.navbar-collapse.collapse
-                ul.nav.navbar-nav.navbar-left
-                  li
-                    a(href='#fashion') Fashion
-                  li
-                    a(href='#electronics') Electronics
-                  li
-                    a(href='#electronics') Sports
-                  li
-                    a(href='#electronics') Daily Deals
-                ul.nav.navbar-nav.navbar-right
-                  li
-                    a(href='/account') Profile
-                  li
-                    a(href='#cart') Shopping Cart
-                  // li
-                  //   a(href='#logout') Logout
-                  li(data-toggle='modal', data-target='#loginBox')
-                    a(href='#login')
-                      span.ion.ion-person(style='margin-right:5px; font-size:120%;')
-                      | Login
-                  li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
-                    a
-                      span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
-                      | Sign Up
-                center
-                  form.navbar-form(action="/search", method="get")
-                    .input-group
-                        input.form-control(type="text", name="searchString", placeholder='Search for items..')
-                        span.input-group-btn
-                          button.btn.btn-default(type="submit") Search
+    if user_ID == undefined
+      - console.log("User is undefined")
+      .navbar-wrapper
+            nav.navbar.navbar-inverse.navbar-static-top
+              .container-fluid
+                .navbar-header
+                  button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                #navbar.navbar-collapse.collapse
+                  ul.nav.navbar-nav.navbar-left
+                    li
+                      a(href='#fashion') Fashion
+                    li
+                      a(href='#electronics') Electronics
+                    li
+                      a(href='#electronics') Sports
+                    li
+                      a(href='#electronics') Daily Deals
+                  ul.nav.navbar-nav.navbar-right
+                    li
+                      a(href='/account') Profile
+                    li
+                      a(href='#cart') Shopping Cart
+                    // li
+                    //   a(href='#logout') Logout
+                    li(data-toggle='modal', data-target='#loginBox')
+                      a(href='#login')
+                        span.ion.ion-person(style='margin-right:5px; font-size:120%;')
+                        | Login
+                    li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
+                      a
+                        span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
+                        | Sign Up
+                  center
+                    form.navbar-form(action="/search", method="get")
+                      .input-group
+                          input.form-control(type="text", name="searchString", placeholder='Search for items..')
+                          span.input-group-btn
+                            button.btn.btn-default(type="submit") Search
 
+  
     // Forgot Password Box 
     #forgotPasswordBox.modal
       .modal-dialog
@@ -101,26 +104,22 @@ html(lang='en')
                     a(href='#', style='color:white;') Forgot password?
                 .panel-body(style='padding-top:30px')
                   #login-alert.alert.alert-danger.col-sm-12(style='display:none')
-                  form#loginform.form-horizontal(role='form')
-                    .input-group(style='margin-bottom: 25px')
-                      span.input-group-addon
-                        i.glyphicon.glyphicon-user
-                      input#login-username.form-control(type='text', name='username', value='', placeholder='username or email')
-                    .input-group(style='margin-bottom: 25px')
-                      span.input-group-addon
-                        i.glyphicon.glyphicon-lock
-                      input#login-password.form-control(type='password', name='password', placeholder='password')
-                    .form-group(style='margin-top:10px')
-                      // Button
-                      .col-sm-12.controls
-                        a#btn-login.btn.btn-success(href='/account') Login  
-                        a#btn-fblogin.btn.btn-primary(href='#') Login with Facebook
+                  form#loginform.form-horizontal(method='post' action='index')
                     .form-group
-                      .col-md-12.control
-                        div(style='border-top: 1px solid#888; padding-top:15px; font-size:85%')
-                          | No account? 
-                          a(href='#', data-dismiss='modal', data-toggle='modal', data-target='#signUpBox')
-                            | Sign Up Here
+                      label.col-md-4.control-label(for='username') Username
+                      .col-md-7.col-md-offset-1
+                        input#pass.form-control(type='username', name='username', placeholder='Username')                   
+                    .form-group
+                      label.col-md-4.control-label(for='pass') Password
+                      .col-md-7.col-md-offset-1
+                        input#pass.form-control(type='password', name='pass', placeholder='Password...')
+                 
+                    .form-group
+                      .col-md-7.col-md-offset-4
+                        //a#btn-login.btn.btn-success(type='submit') Register 
+                        button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Login
+                        button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
+
 
     // Sign Up Box
     #signUpBox.modal
@@ -133,15 +132,15 @@ html(lang='en')
             span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
             h4(style='float:left') Sign Up
           .modal-body
-            form#registrationForm.form-horizontal(method='post' /*action='/account'*/)
+            form#registrationForm.form-horizontal(method='post' action='signUp')
               .form-group
-                label.control-label.col-md-4(for='fname') First Name
+                label.control-label.col-md-4(for='fullname') Full Name
                 .col-md-7.col-md-offset-1
-                  input#name1.form-control(type='text', name='fname', placeholder='Name...')
+                  input#name1.form-control(type='text', name='fname', placeholder='Full Name...')
               .form-group
-                label.control-label.col-md-4(for='lname') Surname
+                label.control-label.col-md-4(for='username') User Name
                 .col-md-7.col-md-offset-1
-                  input#last.form-control(type='text', name='lname', placeholder='Surname...')
+                  input#last.form-control(type='text', name='username', placeholder='Username...')
               .form-group
                 label.col-md-4.control-label(for='email') Email
                 .col-md-7.col-md-offset-1
@@ -156,8 +155,8 @@ html(lang='en')
                   input#pass.form-control(type='imageURL', name='imageURL', placeholder='Image URL')                  
               .form-group
                 .col-md-7.col-md-offset-4
-                  a#btn-login.btn.btn-success(href='/account') Register 
-                  //button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit', href='/account') Register
+                  //a#btn-login.btn.btn-success(type='submit') Register 
+                  button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
 
     // Page Content
