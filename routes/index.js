@@ -6,6 +6,7 @@ var accounts = require('../routes/accounts');
 var viewproduct = require('../routes/viewproduct');
 var cartAdd = require('../routes/cartAdd');
 var cartView = require('../routes/cartView');
+var cartDel = require('../routes/cartDel');
 
 var pg = require('pg').native;
 
@@ -17,12 +18,7 @@ var pg = require('pg').native;
 
 
 //var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
-// var connectionString = 'postgres://localhost/SWEN303';
-
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-//var database = 'postgres://postgres:swen303@localhost:5432/303';
-
+var database = 'postgres://postgres:swen303@localhost:5432/303';
 
 
 /* GET home page. */
@@ -104,5 +100,12 @@ router.post('/viewProduct', function(req, res){
 router.get('/shoppingCart', function(req, res){
 	cartView.view(req, res, database, pg);
 });
+
+/* GET shopping cart page */
+router.post('/shoppingCart', function(req, res){
+	cartDel.delete(req, res, database, pg);
+});
+
+
 
 module.exports = router;
