@@ -31,7 +31,8 @@ block body
 						th Stock
 					each item in listings
 						tr
-							td #{item.label}
+							td 
+								a(href='viewProduct?sid='+item.sid) #{item.label}
 							td $ #{item.price}
 							td #{item.quantity}
 			else
