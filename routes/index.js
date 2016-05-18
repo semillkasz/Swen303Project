@@ -70,9 +70,17 @@ router.get('/account', function(req, res, next) {
 				console.error(error);
 				return;
 			}
-			var queryResult = JSON.stringify(result.rows);
-			res.render('account', { title: 'Buy and Sell', fname: 'Jenn', lname: 'Niven', address: 'Wellington, New Zealand', rating: '4.7/5.0', info: queryResult});
-			console.log(result.rows);
+			var qr = JSON.stringify(result.rows);
+			var queryResult = JSON.parse(qr);
+
+			var u_username = queryResult[2].username;
+  			var u_realname = queryResult[2].realname;
+  			var u_address = queryResult[2].address;
+  			var u_rating = queryResult[2].rating;
+  			var u_photo = queryResult[2].photo;
+
+			res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo});
+			console.log(result.rows);	
 		});
 		};}
 	});

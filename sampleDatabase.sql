@@ -135,7 +135,11 @@ CREATE TABLE users (
 	uid integer NOT NULL,
 	username character varying(50),
 	realname character varying(100),
-	password character varying(50)
+	password character varying(50),
+	address character varying(200),
+	email character varying(100),
+	rating integer,
+	photo text
 );
 
 
@@ -249,18 +253,18 @@ SELECT pg_catalog.setval('transactions_tid_seq', 18, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (uid, username, realname, password) FROM stdin;
-1	admin	Sally Smith	1337
-2	j0nny	John Diggle	password
-3	james	James Green	green
-4	zoo	Monty Python	dinosaur
-5	qwerty	Zoe Curtis	purple
-6	Cambel	Thea Queen	something
-7	Waities	Kara Danvers	secure
-8	Cam	Camile Jones	12345
-9	grod	Cameron Smith	dfgh
-10	flash	Barry Allen	falsh
-11	arrow	Oliver Queen	arrow
+COPY users (uid, username, realname, password, address, email, rating, photo) FROM stdin;
+1	admin	Sally Smith	1337	11 Pattie Street	sulkysally@yahoo.com	4	http://img.thesun.co.uk/aidemitlum/archive/00908/woman-280_908421a.jpg
+2	j0nny	John Diggle	password	22 Fitzherbert Avenue	digglelove@hotmail.com	3	https://pbs.twimg.com/profile_images/661041286942584832/a5SW7Qz5.jpg
+3	james	James Green	green	9 Evergreen Royale Subd	greenjames@mailme.com	2	https://lh3.googleusercontent.com/-Pcv8Ya-Jij8/AAAAAAAAAAI/AAAAAAAADPY/D4YsBTDXvZU/photo.jpg
+4	zoo	Monty Python	dinosaur	3 Rupiah Street	python_guy@gmail.com	1	http://1.bp.blogspot.com/-aeF1Vhzaeck/UQnxO4lKlkI/AAAAAAAAGc0/1ajSxMIqBqc/s1600/SMCARRADINE2.jpg
+5	qwerty	Zoe Curtis	purple	Taal Avenue, Quezon City	zoeba@live.com	5	http://tubestatic.orf.at/static/images/site/tube/2016025/orf_zoe_artist-neu.5440160.jpg
+6	Cambel	Thea Queen	something	213 Curly Subd	queen.thea01@yahoo.com	1	http://www.squamartworkshops.com/stuff/contentmgr/files/0/3673c4f957af7e7e4dfc41623132a2c9/image/_resized/30_360_312_thea_bio_pic_june_2013.jpg
+7	Waities	Kara Danvers	secure	2 May Street	danvers_kara@hotmail.com	4	https://media2.giphy.com/media/W2OIvtTtKZWHm/200_s.gif
+8	Cam	Camile Jones	12345	11 Wilford Boulevard	msjones@hotmail.com	6	http://www.udel.edu/udaily/2011/sep/images/jonescamille.jpg
+9	grod	Cameron Smith	dfgh	62 Hewer Crescent	cameronsmith222@live.com	5	https://auctiondesq.imgstg.com/assets/auctiondesq/lots/images/main/CameronSmith2.jpg
+10	flash	Barry Allen	falsh	10 Flash Street	allenbarrygod@mailme.com	3	http://images.mstarsnews.musictimes.com/data/images/full/72932/grant-gustin.jpg?w=600
+11	arrow	Oliver Queen	arrow	16 Hells Kitchen	arrow_guy@hotmail.com	2	https://s-media-cache-ak0.pinimg.com/736x/a0/3f/c9/a03fc90ec7a81332322d2723d972ffdc.jpg
 \.
 
 
