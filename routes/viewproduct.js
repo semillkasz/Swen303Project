@@ -34,11 +34,15 @@ module.exports = {
   				console.log(p_category);
   				console.log(p_quantity);
 
-  				if (p_quantity <= 5){
-  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, quantity: 'Only ' + p_quantity + ' left!', cartBtn: 'Add to Cart', s_id: sid});
+
+  				if (p_quantity <= 5 && p_quantity > 1){
+  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, quantity: 'Only ' + p_quantity + ' left!', cartBtn: 'Add to Cart'});
   				}
+          else if (p_quantity == 0){
+            res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, noStock: true});
+          }
   				else {
-  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Add to Cart', s_id: sid});
+  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Add to Cart'});
 				}
 			});
 		});
