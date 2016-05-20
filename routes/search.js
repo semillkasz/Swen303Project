@@ -57,7 +57,7 @@ module.exports = {
 						return a.price - b.price;
 					});
 					res.render('search', { title: 'SWEN Shop | Search', listings: listings,
-											searchString: searchString});
+											searchString: searchString, user_id : req.cookies.user_id});
 				}
 				//Sort from highest to lowest price
 				else if (sort == 'high'){
@@ -66,12 +66,12 @@ module.exports = {
 					});
 					listings.reverse();
 					res.render('search', { title: 'SWEN Shop | Search', listings: listings,
-											searchString: searchString});
+											searchString: searchString, user_id : req.cookies.user_id});
 				}
 				else{
 					//Return all listings
 					res.render('search', { title: 'SWEN Shop | Search', listings: listings,
-											searchString: searchString});
+											searchString: searchString, user_id : req.cookies.user_id});
 				}
 			});
 		});

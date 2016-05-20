@@ -9,7 +9,7 @@ module.exports = {
 				process.exit(1);
 			}
 			else {
-				var uid = req.query.uid;
+				var uid = req.cookies.user_id;
 				client.query("SELECT * FROM users WHERE uid = "+uid+";", function(error, result){
 					if(error){
 						console.error('Failed to execute query');
@@ -49,7 +49,7 @@ module.exports = {
 			  				// var stock = [];
 
 			  				
-							res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows});
+							res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows, user_id: req.cookies.user_id});
 							console.log(result.rows);	
 						});
 					});
