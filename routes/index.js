@@ -36,6 +36,7 @@ router.get('/', function(req, res, next) {
 			function(error, result){
 				done();
 				res.render('index',{slider_data: result.rows, user_id : req.cookies.user_id});	
+				console.log(result.rows);
 		    });
 
 	});
