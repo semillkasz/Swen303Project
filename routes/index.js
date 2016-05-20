@@ -167,7 +167,6 @@ router.get('/shoppingCart', function(req, res){
 	cartView.view(req, res, database, pg);
 });
 
-/* GET shopping cart page */
 router.post('/shoppingCart', function(req, res){
 	cartDel.delete(req, res, database, pg);
 });
