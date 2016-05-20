@@ -12,11 +12,11 @@ module.exports = {
       }
       console.log('Connected to database');
 
-      // var sid = req.query.sid;
+      var sid = req.query.sid;
       // Current User
       // var uid = req.query.uid;
 
-      client.query("SELECT * FROM stock WHERE sid = 10;", function(error, result){
+      client.query("SELECT * FROM stock WHERE sid = "+ sid+";", function(error, result){
 
         var q = JSON.stringify(result.rows);
         var queryResult = JSON.parse(q);
@@ -29,7 +29,7 @@ module.exports = {
         var p_quantity = queryResult[0].quantity;
 
         client.query("INSERT INTO cart (uid, sid, label, price) " +
-          "VALUES(1, 10, '"+p_label+"', '"+p_price+"');", 
+          "VALUES(1, '"+sid+"', '"+p_label+"', '"+p_price+"');", 
         function(error, result){
           done();
             if(error){
