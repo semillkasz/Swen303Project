@@ -153,34 +153,8 @@ router.post('/createlisting', function(req, res) {
 });
 	
 /* GET account page. */
-router.get('/account', function(req, res, next) {
-	pg.connect(database, onConnect);
-	function onConnect(err, client, done) {
-		if (err) {
-			console.error(err);
-			process.exit(1);
-		}
-		else {
-			client.query("SELECT * FROM users;", function(error, result){
-			done();
-			if(error){
-				console.error('Failed to execute query');
-				console.error(error);
-				return;
-			}
-			var qr = JSON.stringify(result.rows);
-			var queryResult = JSON.parse(qr);
-
-			var u_username = queryResult[2].username;
-  			var u_realname = queryResult[2].realname;
-  			var u_address = queryResult[2].address;
-  			var u_rating = queryResult[2].rating;
-  			var u_photo = queryResult[2].photo;
-
-			res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo});
-			console.log(result.rows);	
-		});
-		};}
+router.get('/account', function(req, res) {
+	accounts.accounts(req, res, database, pg);
 	});
 
 /* GET view product page. */
@@ -197,7 +171,6 @@ router.get('/shoppingCart', function(req, res){
 	cartView.view(req, res, database, pg);
 });
 
-/* GET shopping cart page */
 router.post('/shoppingCart', function(req, res){
 	cartDel.delete(req, res, database, pg);
 });
