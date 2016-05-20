@@ -9,7 +9,8 @@ module.exports = {
 				process.exit(1);
 			}
 			else {
-				client.query("SELECT * FROM users;", function(error, result){
+				var uid = req.query.uid;
+				client.query("SELECT * FROM users WHERE uid = "+uid+";", function(error, result){
 					if(error){
 						console.error('Failed to execute query');
 						console.error(error);
@@ -18,13 +19,13 @@ module.exports = {
 					var qr = JSON.stringify(result.rows);
 					var queryResult = JSON.parse(qr);
 
-					var u_username = queryResult[10].username;
-		  			var u_realname = queryResult[10].realname;
-		  			var u_address = queryResult[10].address;
-		  			var u_rating = queryResult[10].rating;
-		  			var u_photo = queryResult[10].photo;
+					var u_username = queryResult[0].username;
+		  			var u_realname = queryResult[0].realname;
+		  			var u_address = queryResult[0].address;
+		  			var u_rating = queryResult[0].rating;
+		  			var u_photo = queryResult[0].photo;
 
-		  			client.query("SELECT sid FROM transactions WHERE uid = 10;", function(error, result){
+		  			client.query("SELECT sid FROM transactions WHERE uid = "+uid+";", function(error, result){
 		  				if(error){
 		  					console.error('Failed to execute query');
 		  					console.error(error);
@@ -36,7 +37,7 @@ module.exports = {
 		  				// 	//for every item in results 
 		  				// 	// photo[i] = results[i].photourl
 		  				// }
-		  				client.query("SELECT photourl FROM stock WHERE sid = 10;", function(error, result){
+		  				client.query("SELECT photourl FROM stock WHERE sid  = "+uid+";", function(error, result){
 			  				done();
 			  				if(error){
 			  					console.error('Failed to execute query');
