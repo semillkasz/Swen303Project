@@ -48,7 +48,7 @@ module.exports = {
 			  				// var stock = [];
 
 			  				
-							res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo});
+							res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows});
 							console.log(result.rows);	
 						});
 					});
