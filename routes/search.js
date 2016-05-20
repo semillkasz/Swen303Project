@@ -10,6 +10,9 @@ module.exports = {
 				return;
 			}
 			console.log('Connected to database');
+			console.log(req.cookies);
+
+			
 
 			var searchString = req.query.searchString;
 			var categoryResults = [];

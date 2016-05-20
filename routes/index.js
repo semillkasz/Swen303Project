@@ -17,8 +17,8 @@ var pg = require('pg').native;
 */
 
 
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-var database = 'postgres://postgres:swen303@localhost:5432/303';
+var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+//var database = 'postgres://postgres:swen303@localhost:5432/303';
 //var connectionString = 'postgres://localhost/SWEN303';
 
 
@@ -35,29 +35,20 @@ router.get('/', function(req, res, next) {
 			client.query("SELECT * FROM stock",
 			function(error, result){
 				done();
-				res.render('index',{slider_data: result.rows});	
-		    });
-
-	});
-}); 
-router.get('/index', function(req, res, next) {
-	pg.connect(database, function(err, client, done){
-			if(err){
-				console.error('Could not connect to the database');
-				console.error(err);
-				return;
-			}
-			console.log('Connected to database');
-			client.query("SELECT * FROM stock",
-			function(error, result){
-				done();
-				res.render('index',{slider_data: result.rows});	
+				res.render('index',{slider_data: result.rows, user_id : req.cookies.user_id});	
 		    });
 
 	});
 }); 
 
-router.post('/signUp', function(req, res, next) {
+
+router.get('/removeCookie', function(req, res){
+  res.clearCookie('user_id');
+  res.redirect('/');
+});
+
+router.post('/', function(req, res, next) {
+	console.log("Signing up")
 	pg.connect(database, function(err, client, done){
 			if(err){
 				console.error('Could not connect to the database');
@@ -91,14 +82,13 @@ router.post('/signUp', function(req, res, next) {
 					return;
 				}
 				res.redirect('/');
-
 			});
 		});
 }); 
 
 
-router.post('/index', function(req, res, next) {
-	console.log("IM IN HERE NOW")
+router.post('/login', function(req, res, next) {
+	console.log("Logging In")
 	pg.connect(database, function(err, client, done){
 			if(err){
 				console.error('Could not connect to the database');
@@ -106,27 +96,41 @@ router.post('/index', function(req, res, next) {
 				return;
 			}
 			console.log('Connected to database');
-			
 			var username = req.body.username;
 			var password = req.body.password;
 
-			client.query("SELECT * FROM users",
+			client.query("SELECT * FROM users WHERE username = '"+username+"';",
 			function(error, result){
 				done();
-				for(var i = 0; i < result.rows.length; i++){
-					if(username = result.rows[i].username){
-						if(password = result.rows[i].password){
-							res.render('index', {user_id : result.rows[i].uid});
-							//res.redirect('/');
-							return;
-						}
-					}
+				if(result.rows.length == 0 || result == undefined){
+					//res.render('index', {slider_data: slider_data, reportMsg: "Error"});
+					res.redirect('/');
+					return;
 				}
-				console.log("FAILLLLLLLLLLLLLLLLL")
+				var passwordSearch = result.rows[0].password;
+				var uid = result.rows[0].uid;
+				console.log(password)
+				console.log(passwordSearch)
+				if(password.toString() === passwordSearch.toString()){
+					res.cookie('user_id', uid, {maxAge: 999999999999999});
+					//res.render('index', {slider_data: slider_data, user_id : req.cookies.user_id});
+					res.redirect('/');
+					return;
+				} else{
+					console.log("here");
+					res.redirect('/');
+
+					return;
+				}
 			});
 
-	
 		});
+
+
+			
+
+
+	
 }); 
 
 /* GET search page. */
