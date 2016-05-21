@@ -24,6 +24,7 @@ module.exports = {
 		  			var u_address = queryResult[0].address;
 		  			var u_rating = queryResult[0].rating;
 		  			var u_photo = queryResult[0].photo;
+		  			var u_feedback = queryResult[0].feedback;
 
 		  			//Recently Bought
 		  			client.query("SELECT sid FROM transactions WHERE uid = "+uid+";", function(error, result){
@@ -33,22 +34,23 @@ module.exports = {
 		  					return;
 		  				}
 
-		  				var transaction_sids = JSON.stringify(result.rows);
-		  				var tSIDs = JSON.parse(transaction_sids);
-		  				// var boughtitems = [];
-						for (var i in tSIDs){
-					    	client.query("SELECT photourl FROM stock WHERE sid  = "+tSIDs[i].sid+";", function(error, result){
-				  				done();
-				  				if(error){
-				  					console.error('Failed to execute query');
-				  					console.error(error);
-				  					return;
-				  				}
-				  				console.log(result.rows);
-							});
-					    }
-					    console.log(result.rows);
-					    res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows});
+		  				
+					    client.query("SELECT photourl, sid FROM transactions WHERE uid  = "+uid+";", function(error, result){
+				  			done();
+				  			if(error){
+				  				console.error('Failed to execute query');
+				  				console.error(error);
+				  				return;
+				  			}
+				  	// 		var qr = JSON.stringify(result.rows);
+							// var queryResult = JSON.parse(qr);
+				  	// 		var boughtitem = queryResult[0].photourl;
+				  	// 		console.log(boughtitem);
+				  			res.render('account', {user_id : req.cookies.user_id, title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, feedback: u_feedback, boughtItems: result.rows, slider_data: ''});
+						});	
+					    
+					    //console.log(boughtitems);
+					    //res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows});
 					});
 				});
 			}

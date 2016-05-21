@@ -141,44 +141,31 @@ block body
                   //a#btn-login.btn.btn-success(type='submit') Register 
                   button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
-                
+    hr           
     .row.featurette
       .col-md-7.col-md-push-5
         h2.featurette-heading #{realname}
         p.lead #{address}
         p.lead #{rating}/5
-        p #{info}
+        h5 "#{feedback}"
       .col-md-3.col-md-pull-5
         img.featurette-image.img-responsive.center-block(src='#{photoSRC}')
     
     .container-fluid
-      hr
       .row
-        .col-lg-12
+      .col-lg-12
           h2.page-header Recently Bought
           .dave
               .slider-data
                   .multiple-items(style='margin: auto; width: 100%;')
                       -var a=0
-                      each val in slider_data
+                      each val in boughtItems
                           -a++
-                          -var imageURL = slider_data[a-1].photourl;
-                          a(href='/viewProduct')
-                              img(src= "" + imageURL)
-      hr
-      .row
-        .col-lg-12
-          h2.page-header Feedbacks
-          .dave
-              .slider-data
-                  .multiple-items(style='margin: auto; width: 100%;')
-                      -var a=0
-                      each val in slider_data
-                          -a++
-                          -var imageURL = slider_data[a-1].photourl;
-                          a(href='/viewProduct')
-                              img(src= "" + imageURL)
-      hr
+                          -var imageURL = boughtItems[a-1].photourl;
+                          -var imageSID = boughtItems[a-1].sid;
+                          a(href='/viewProduct' + "?sid=" + imageSID)
+                              img(src= "" + imageURL, width='200', height='200')
+      
       .row
         .col-lg-12
           h2.page-header Items For Sale
@@ -186,13 +173,15 @@ block body
               .slider-data
                   .multiple-items(style='margin: auto; width: 100%;')
                       -var a=0
+                      if(slider_data=='')
+                        p No items for sale
                       each val in slider_data
                           -a++
                           -var imageURL = slider_data[a-1].photourl;
-                          a(href='/viewProduct')
+                          -var imageSID = slider_data[a-1].sid;
+                          a(href='/viewProduct' + "?sid=" + imageSID)
                               img(src= "" + imageURL)
       hr
-      
       // Site footer
       footer.footer
         p © SWEN303 2016

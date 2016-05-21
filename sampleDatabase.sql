@@ -105,7 +105,8 @@ CREATE TABLE transactions (
 	tid integer NOT NULL,
 	sid integer,
 	uid integer,
-	type character varying(10)
+	type character varying(10),
+	photourl character varying(200)
 );
 
 
@@ -140,7 +141,8 @@ CREATE TABLE users (
 	address character varying(200),
 	email character varying(100),
 	rating integer,
-	photo text
+	photo text,
+	feedback text
 );
 
 
@@ -221,25 +223,25 @@ SELECT pg_catalog.setval('stock_sid_seq', 18, true);
 -- Data for Name: transactions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY transactions (tid, sid, uid, type) FROM stdin;
-1	3	1	PURCHASE
-2	1	9	PURCHASE
-3	4	3	PURCHASE
-4	5	4	PURCHASE
-5	14	1	PURCHASE
-6	14	9	PURCHASE
-7	14	8	PURCHASE
-8	18	7	PURCHASE
-9	17	7	PURCHASE
-10	18	5	PURCHASE
-11	11	10	PURCHASE
-12	11	2	PURCHASE
-13	11	10	PURCHASE
-14	11	1	PURCHASE
-15	9	10	PURCHASE
-16	3	10	PURCHASE
-17	17	10	PURCHASE
-18	13	10	PURCHASE
+COPY transactions (tid, sid, uid, type, photourl) FROM stdin;
+1	3	1	PURCHASE	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1
+2	1	9	PURCHASE	http://www.bhphotovideo.com/images/categoryImages/desktop/325x325/21008-Mirrorless-System-Cameras.jpg
+3	4	3	PURCHASE	http://www.namastenewzealand.com/wp-content/uploads/2015/08/Rotorua-Rainbow-Springs-Kiwi-Wildlife-Park-350x350.jpg
+4	5	4	PURCHASE	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw2951e8c7/hi-res/764054p.jpg?sw=325
+5	14	1	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+6	14	9	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+7	14	8	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+8	18	7	PURCHASE	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/
+9	17	7	PURCHASE	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg
+10	18	5	PURCHASE	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/
+11	11	11	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+12	11	2	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+13	11	10	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+14	11	1	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+15	9	10	PURCHASE	http://www.womenofchina.cn/res/womenofchina/1301/i.jpg
+16	3	10	PURCHASE	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1
+17	17	6	PURCHASE	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg
+18	13	10	PURCHASE	http://www.fashion-fit.us/ff2016_files/image048.jpg
 \.
 
 
@@ -254,18 +256,18 @@ SELECT pg_catalog.setval('transactions_tid_seq', 18, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (uid, username, realname, password, address, email, rating, photo) FROM stdin;
-1	admin	Sally Smith	1337	11 Pattie Street	sulkysally@yahoo.com	4	http://img.thesun.co.uk/aidemitlum/archive/00908/woman-280_908421a.jpg
-2	j0nny	John Diggle	password	22 Fitzherbert Avenue	digglelove@hotmail.com	3	https://pbs.twimg.com/profile_images/661041286942584832/a5SW7Qz5.jpg
-3	james	James Green	green	9 Evergreen Royale Subd	greenjames@mailme.com	2	https://lh3.googleusercontent.com/-Pcv8Ya-Jij8/AAAAAAAAAAI/AAAAAAAADPY/D4YsBTDXvZU/photo.jpg
-4	zoo	Monty Python	dinosaur	3 Rupiah Street	python_guy@gmail.com	1	http://1.bp.blogspot.com/-aeF1Vhzaeck/UQnxO4lKlkI/AAAAAAAAGc0/1ajSxMIqBqc/s1600/SMCARRADINE2.jpg
-5	qwerty	Zoe Curtis	purple	Taal Avenue, Quezon City	zoeba@live.com	5	http://tubestatic.orf.at/static/images/site/tube/2016025/orf_zoe_artist-neu.5440160.jpg
-6	Cambel	Thea Queen	something	213 Curly Subd	queen.thea01@yahoo.com	1	http://www.squamartworkshops.com/stuff/contentmgr/files/0/3673c4f957af7e7e4dfc41623132a2c9/image/_resized/30_360_312_thea_bio_pic_june_2013.jpg
-7	Waities	Kara Danvers	secure	2 May Street	danvers_kara@hotmail.com	4	https://media2.giphy.com/media/W2OIvtTtKZWHm/200_s.gif
-8	Cam	Camile Jones	12345	11 Wilford Boulevard	msjones@hotmail.com	6	http://www.udel.edu/udaily/2011/sep/images/jonescamille.jpg
-9	grod	Cameron Smith	dfgh	62 Hewer Crescent	cameronsmith222@live.com	5	https://auctiondesq.imgstg.com/assets/auctiondesq/lots/images/main/CameronSmith2.jpg
-10	flash	Barry Allen	falsh	10 Flash Street	allenbarrygod@mailme.com	3	http://images.mstarsnews.musictimes.com/data/images/full/72932/grant-gustin.jpg?w=600
-11	arrow	Oliver Queen	arrow	16 Hells Kitchen	arrow_guy@hotmail.com	2	https://s-media-cache-ak0.pinimg.com/736x/a0/3f/c9/a03fc90ec7a81332322d2723d972ffdc.jpg
+COPY users (uid, username, realname, password, address, email, rating, photo, feedback) FROM stdin;
+1	admin	Sally Smith	1337	11 Pattie Street	sulkysally@yahoo.com	4	http://img.thesun.co.uk/aidemitlum/archive/00908/woman-280_908421a.jpg	Excellent buyer. A++++++.
+2	j0nny	John Diggle	password	22 Fitzherbert Avenue	digglelove@hotmail.com	3	https://pbs.twimg.com/profile_images/661041286942584832/a5SW7Qz5.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+3	james	James Green	green	9 Evergreen Royale Subd	greenjames@mailme.com	2	https://lh3.googleusercontent.com/-Pcv8Ya-Jij8/AAAAAAAAAAI/AAAAAAAADPY/D4YsBTDXvZU/photo.jpg	Lovely buyer. A pleasure doing business with. 
+4	zoo	Monty Python	dinosaur	3 Rupiah Street	python_guy@gmail.com	1	http://1.bp.blogspot.com/-aeF1Vhzaeck/UQnxO4lKlkI/AAAAAAAAGc0/1ajSxMIqBqc/s1600/SMCARRADINE2.jpg	Terrible buyer! Do not sell anything for this person.
+5	qwerty	Zoe Curtis	purple	Taal Avenue, Quezon City	zoeba@live.com	5	http://tubestatic.orf.at/static/images/site/tube/2016025/orf_zoe_artist-neu.5440160.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+6	Cambel	Thea Queen	something	213 Curly Subd	queen.thea01@yahoo.com	1	http://www.squamartworkshops.com/stuff/contentmgr/files/0/3673c4f957af7e7e4dfc41623132a2c9/image/_resized/30_360_312_thea_bio_pic_june_2013.jpg	Terrible buyer! Do not sell anything for this person.
+7	Waities	Kara Danvers	secure	2 May Street	danvers_kara@hotmail.com	4	https://media2.giphy.com/media/W2OIvtTtKZWHm/200_s.gif	Excellent buyer. A++++++.
+8	Cam	Camile Jones	12345	11 Wilford Boulevard	msjones@hotmail.com	5	http://www.udel.edu/udaily/2011/sep/images/jonescamille.jpg	Excellent buyer. A++++++.
+9	grod	Cameron Smith	dfgh	62 Hewer Crescent	cameronsmith222@live.com	5	https://auctiondesq.imgstg.com/assets/auctiondesq/lots/images/main/CameronSmith2.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+10	flash	Barry Allen	falsh	10 Flash Street	allenbarrygod@mailme.com	3	http://images.mstarsnews.musictimes.com/data/images/full/72932/grant-gustin.jpg?w=600	Good buyer, prompt payment, valued customer, highly recommended.
+11	arrow	Oliver Queen	arrow	16 Hells Kitchen	arrow_guy@hotmail.com	2	https://s-media-cache-ak0.pinimg.com/736x/a0/3f/c9/a03fc90ec7a81332322d2723d972ffdc.jpg	Lovely buyer. A pleasure doing business with. 
 \.
 
 
@@ -289,4 +291,3 @@ SELECT pg_catalog.setval('users_uid_seq', 11, true);
 --
 -- PostgreSQL database dump complete
 --
-
