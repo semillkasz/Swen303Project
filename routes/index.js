@@ -7,6 +7,7 @@ var viewproduct = require('../routes/viewproduct');
 var cartAdd = require('../routes/cartAdd');
 var cartView = require('../routes/cartView');
 var cartDel = require('../routes/cartDel');
+var purchasedItems = require('../routes/purchasedItems');
 
 var pg = require('pg').native;
 
@@ -20,7 +21,6 @@ var pg = require('pg').native;
 //var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
 var database = 'postgres://postgres:swen303@localhost:5432/303';
 //var connectionString = 'postgres://localhost/SWEN303';
-
 
 
 /* GET home page. */
@@ -71,7 +71,7 @@ router.post('/', function(req, res, next) {
 				return;
 			}
 			
-			
+	
 			//Add the item to the users table
 			client.query("INSERT INTO users ( username, realname, password, email, photo) " +
 				"VALUES('"+userName+"', '"+fullName+"', '"+password+"', '"+email+"','"+photoURL+"');",
@@ -176,6 +176,9 @@ router.post('/shoppingCart', function(req, res){
 	cartDel.delete(req, res, database, pg);
 });
 
-
+/* GET purchased page */
+router.get('/purchased', function(req, res){
+	purchasedItems.purchase(req, res, database, pg);
+});
 
 module.exports = router;

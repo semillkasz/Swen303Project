@@ -12,7 +12,9 @@ module.exports = {
       }
       console.log('Connected to database');
 
-      client.query("SELECT * FROM cart WHERE uid = 1;", function(error, result){
+      var uid = req.cookies.user_id;
+
+      client.query("SELECT * FROM cart WHERE uid = " +uid+" ;", function(error, result){
         //var u_id = current user
 
         var queryResult = result.rows;
@@ -27,7 +29,7 @@ module.exports = {
           cart.push(lookupMap[i]);
         }
 
-        res.render('shoppingCart', { title: 'Shopping Cart', cart: cart});
+        res.render('shoppingCart', { title: 'Shopping Cart', cart: cart, user_id : req.cookies.user_id});
         
       });
     });

@@ -13,8 +13,8 @@ module.exports = {
       console.log('Connected to database');
 
       var sid = req.query.sid;
-      // Current User
-      // var uid = req.query.uid;
+
+      var uid = req.cookies.user_id;
 
       client.query("SELECT * FROM stock WHERE sid = "+ sid+";", function(error, result){
 
@@ -29,7 +29,7 @@ module.exports = {
         var p_quantity = queryResult[0].quantity;
 
         client.query("INSERT INTO cart (uid, sid, label, price) " +
-          "VALUES(1, '"+sid+"', '"+p_label+"', '"+p_price+"');", 
+          "VALUES('"+ uid + "'  , '"+sid+"', '"+p_label+"', '"+p_price+"');", 
         function(error, result){
           done();
             if(error){
@@ -38,7 +38,7 @@ module.exports = {
             return;
             }
         // res.redirect(req.get('referer'));    
-        res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Added to Cart'});
+        res.render('viewProduct', { title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Added to Cart', user_id : req.cookies.user_id});
       });
     });
   });

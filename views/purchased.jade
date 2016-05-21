@@ -14,9 +14,7 @@ head
   link(rel='stylesheet', type='text/css', href='style.css')
   script(language='Javascript', src='index.js')
 
-
 block body
-    
     .container-fluid
       header
         nav.navbar.navbar-default.navbar-fixed-top
@@ -68,7 +66,7 @@ block body
               input.form-control(type='text', placeholder='Email...', name='email')
             .form-group
               button.btn.btn-primary Submit
-
+                                
     // Login Box         
     #loginBox.modal
       .modal-dialog
@@ -103,45 +101,6 @@ block body
                         //a#btn-login.btn.btn-success(type='submit') Register 
                         button#register1.btn.btn-success(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Login
                         button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
-
-
-    // Sign Up Box
-    #signUpBox.modal
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true')
-                span.glyphicon.glyphicon-remove
-            span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
-            h4(style='float:left') Sign Up
-          .modal-body
-            form#registrationForm.form-horizontal(method='post' action='/')
-              .form-group
-                label.control-label.col-md-4(for='fullname') Full Name
-                .col-md-7.col-md-offset-1
-                  input#name1.form-control(type='text', name='fname', placeholder='Full Name...')
-              .form-group
-                label.control-label.col-md-4(for='username') User Name
-                .col-md-7.col-md-offset-1
-                  input#last.form-control(type='text', name='username', placeholder='Username...')
-              .form-group
-                label.col-md-4.control-label(for='email') Email
-                .col-md-7.col-md-offset-1
-                  input#email.form-control(type='email', name='email', placeholder='Email...')
-              .form-group
-                label.col-md-4.control-label(for='pass') Password
-                .col-md-7.col-md-offset-1
-                  input#pass.form-control(type='password', name='pass', placeholder='Password...')
-              .form-group
-                label.col-md-4.control-label(for='imageURL') ImageURL
-                .col-md-7.col-md-offset-1
-                  input#pass.form-control(type='imageURL', name='imageURL', placeholder='Image URL')                  
-              .form-group
-                .col-md-7.col-md-offset-4
-                  //a#btn-login.btn.btn-success(type='submit') Register 
-                  button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
-                  button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
 
 
       // Sign Up Box
@@ -181,29 +140,31 @@ block body
                   //a#btn-login.btn.btn-success(type='submit') Register 
                   button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
+    .container.text-center
+      .row.content
+        .col-sm-2.sidenav
+        #content.col-sm-8.text-left
+          h1 #{title}
+          br
+          p You have purchased the following items:
+          br
+          if cart != undefined && cart.length > 0
+            table.table.table-hover
+              tr
+                th Item Name
+                th Price
+                th Quantity
+              each item in cart
+                tr
+                  td #{item.label}
+                  td $ #{item.price}
+                  td #{item.quantity}
+          br
+          h3 Total: $ #{total}
+          h5 Free Shipping storewide
 
-
-    .container.text-justified
-      .row
-        #productImg.col-md-4
-         img(src='#{photoSRC}')
-         #addCartBtn.col-sm-12
-         if noStock
-          p Sorry this item is no longer available
-         else
-          form(action='', method='post') 
-           button.btn.btn-default #{cartBtn}
-
-        #productDetails.col-md-8
-         h3 #{title} 
-         h6 tags: #{category} 
-         br
-         p  $#{price}  
-         p #{quantity}
-         br
-         p  #{product_details} 
-
-           //Will do reviews later?
+           
+  
 
     .navbar.navbar-default.navbar-fixed-bottom
       .container

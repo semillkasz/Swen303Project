@@ -12,7 +12,9 @@ module.exports = {
       }
       console.log('Connected to database');
 
-      client.query("SELECT * FROM cart WHERE uid = 1;", function(error, result){
+      var uid = req.cookies.user_id;
+
+      client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
 
         // var queryResult = JSON.stringify(result.rows);
         // var queryResult = JSON.parse(q);
@@ -31,7 +33,13 @@ module.exports = {
           cart.push(lookupMap[i]);
         }
 
-        res.render('shoppingCart', { title: 'Shopping Cart', cart: cart});
+         var total = '0';
+
+        for (i in cart){
+          total = +total + +cart[i].price;
+        }
+
+        res.render('shoppingCart', { user_id : req.cookies.user_id, title: 'Shopping Cart', cart: cart, total: total});
         
       });
     });
