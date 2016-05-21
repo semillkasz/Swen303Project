@@ -153,7 +153,6 @@ head
           a(href='search?searchString='+searchString+'&sort=low') Lowest to highest price
         li
           a(href='search?searchString='+searchString+'&sort=high') Highest to lowest price
-   //dropdown("Sort by",[{text:"Lowest to highest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=low"},{text:"Highest to lowest price",url:"http://localhost:3000/search?searchString="+searchString+"&sort=high"}])
    br
    .container
      if listings != undefined && listings.length > 0
@@ -169,4 +168,8 @@ head
              td $ #{item.price}
              td #{item.quantity}
      else
-       alert-info("No results found")
+       .panel.panel-primary
+         .panel-heading
+           .panel-title Report Message
+         .panel-body(style='padding-top:30px')
+           p No results found

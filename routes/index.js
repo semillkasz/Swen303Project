@@ -141,12 +141,12 @@ router.get('/search', function(req, res) {
 
 /* GET categories page. */
 router.get('/categories', function(req, res) {
-	res.render('categories', { title: 'SWEN Shop | Categories' });
+	res.render('categories', { title: 'SWEN Shop | Categories', user_id : req.cookies.user_id });
 });
 
 /* GET create listings page. */
 router.get('/createlisting', function(req, res) {
-	res.render('createlisting', { title: 'SWEN Shop | create listing' });
+	res.render('createlisting', { title: 'SWEN Shop | create listing', user_id : req.cookies.user_id });
 });
 	
 router.post('/createlisting', function(req, res) {
