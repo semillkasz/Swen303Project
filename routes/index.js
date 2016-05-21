@@ -126,12 +126,6 @@ router.post('/login', function(req, res, next) {
 			});
 
 		});
-
-
-			
-
-
-	
 }); 
 
 /* GET search page. */

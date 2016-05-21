@@ -144,18 +144,18 @@ head
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
  .container
    h1= title
-    .dropdown
-      button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
-        | Sort By
-        span.caret
-      ul.dropdown-menu
-        li
-          a(href='search?searchString='+searchString+'&sort=low') Lowest to highest price
-        li
-          a(href='search?searchString='+searchString+'&sort=high') Highest to lowest price
    br
    .container
      if listings != undefined && listings.length > 0
+       .dropdown
+         button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
+          | Sort By
+          span.caret
+         ul.dropdown-menu
+           li
+             a(href='search?searchString='+searchString+'&sort=low') Lowest to highest price
+           li
+             a(href='search?searchString='+searchString+'&sort=high') Highest to lowest price
        table.table.table-hover
          tr
            th Item Name

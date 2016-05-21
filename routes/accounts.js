@@ -10,6 +10,12 @@ module.exports = {
 			}
 			else {
 				var uid = req.cookies.user_id;
+				
+				if(uid == undefined){
+					res.render('account', {user_id : req.cookies.user_id, title: 'Buy and Sell'});
+					return;
+				}
+				
 				client.query("SELECT * FROM users WHERE uid = "+uid+";", function(error, result){
 					if(error){
 						console.error('Failed to execute query');

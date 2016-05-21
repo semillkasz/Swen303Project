@@ -13,6 +13,11 @@ module.exports = {
       console.log('Connected to database');
 
       var uid = req.cookies.user_id;
+	  
+	  if(uid == undefined){		
+		res.redirect('/');
+		return;
+	  }
 
       client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
 

@@ -191,8 +191,13 @@ block body
          if noStock
           p Sorry this item is no longer available
          else
-          form(action='', method='post') 
-           button.btn.btn-default #{cartBtn}
+          if user_id == undefined
+           form(action='', method='post') 
+            button.btn.btn-default.disabled #{cartBtn}
+            p Log in or create an account to add items to the cart.
+          else
+           form(action='', method='post') 
+            button.btn.btn-default #{cartBtn}
 
         #productDetails.col-md-8
          h3 #{title} 

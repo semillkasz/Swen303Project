@@ -17,6 +17,12 @@ module.exports = {
 			//Query the datebase by category
 			client.query("SELECT * FROM stock WHERE category ~* '"+searchString+"';", 
 			function(error, result){
+				if(error || result == undefined){
+					console.error('Failed to execute query');
+					res.render('search', { title: 'SWEN Shop | Search',
+											searchString: searchString, user_id : req.cookies.user_id});
+					return;
+				}
 				catagoryResults = result.rows;
 			});
 			
@@ -24,6 +30,13 @@ module.exports = {
 			client.query("SELECT * FROM stock WHERE label ~* '"+searchString+"';", 
 			function(error, result){
 				done();
+				
+				if(error || result == undefined){
+					console.error('Failed to execute query');
+					console.error(error);
+					return;
+				}
+				
 				var searchResults = result.rows;
 				//Merge the category and search results together
 				var results = searchResults.concat(catagoryResults);
@@ -43,13 +56,9 @@ module.exports = {
 				}
 				
 				var sort = req.query.sort; //Can be undefined
-				if(error){
-					console.error('Failed to execute query');
-					console.error(error);
-					return;
-				}
+				
 				//Sort from lowest to highest price
-				else if (sort == 'low'){
+				if (sort == 'low'){
 					listings.sort(function(a, b){
 						return a.price - b.price;
 					});
