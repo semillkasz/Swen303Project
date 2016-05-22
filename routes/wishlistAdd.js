@@ -13,15 +13,17 @@ module.exports = {
 			console.log('Connected to database');
 
 			var sid = req.query.sid;
-
-			console.log(sid);
-			
 			var uid = req.cookies.user_id;
 
+			if (uid == undefined) {
+				res.redirect('/');
+				return;
+			}
+
 			client.query("SELECT * FROM stock WHERE sid = " + sid + ";", function (error, result) {
-				
+
 				console.log(result);
-				
+
 				var q = JSON.stringify(result.rows);
 				var queryResult = JSON.parse(q);
 
@@ -32,26 +34,54 @@ module.exports = {
 				var p_category = queryResult[0].category;
 				var p_quantity = queryResult[0].quantity
 
-					client.query("INSERT INTO wishlist (uid, sid_item, label, price) " +
-						"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_price + "');",
+					//Check for duplicates
+					client.query("SELECT * FROM wishlist WHERE uid = " + uid + " AND sid_item = " + sid + ";",
 						function (error, result) {
-						done();
 						if (error) {
 							console.error('Failed to execute query');
 							console.error(error);
 							return;
 						}
 
-						res.render('viewProduct', {
-							sid: sid,
-							title : p_label,
-							price : p_price,
-							category : p_category,
-							product_details : p_details,
-							photoSRC : p_url,
-							cartBtn : 'Add to Cart',
-							wishlistBtn: 'Added to Wishlist',
-							user_id : req.cookies.user_id
+						//If duplicate found, don't add to wish list
+						if (result.rows.length > 0) {
+							res.render('viewProduct', {
+								sid : sid,
+								title : p_label,
+								price : p_price,
+								category : p_category,
+								product_details : p_details,
+								photoSRC : p_url,
+								cartBtn : 'Add to Cart',
+								wishlistBtn : 'Add to Wishlist',
+								user_id : req.cookies.user_id,
+								reportMsg : 'This item is already on your wish list.'
+							});
+							return;
+						}
+
+						client.query("INSERT INTO wishlist (uid, sid_item, label, price) " +
+							"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_price + "');",
+							function (error, result) {
+							done();
+							if (error) {
+								console.error('Failed to execute query');
+								console.error(error);
+								return;
+							}
+
+							res.render('viewProduct', {
+								sid : sid,
+								title : p_label,
+								price : p_price,
+								category : p_category,
+								product_details : p_details,
+								photoSRC : p_url,
+								cartBtn : 'Add to Cart',
+								wishlistBtn : 'Added to Wishlist',
+								user_id : req.cookies.user_id,
+								reportMsg : 'Item added to wish list.'
+							});
 						});
 					});
 			});

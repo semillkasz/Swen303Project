@@ -186,6 +186,13 @@ block body
 
 
     .container.text-justified
+      if reportMsg != undefined
+       br
+       .panel.panel-primary
+        .panel-heading
+         .panel-title Report Message
+        .panel-body(style='padding-top:30px')
+         p #{reportMsg}
       .row
         #productImg.col-md-4
          img(src='#{photoSRC}')
@@ -194,11 +201,11 @@ block body
           p Sorry this item is no longer available
          else
           if user_id == undefined
-           form(action='', method='post') 
+           form(action='/viewProduct?sid='+sid, method='post') 
             button.btn.btn-default.disabled #{cartBtn}
            p Log in or create an account to add items to the cart.
           else
-           form(action='', method='post') 
+           form(action='/viewProduct?sid='+sid, method='post') 
             button.btn.btn-default #{cartBtn}
            form(action='/wishlist?sid='+sid, method='post') 
             button.btn.btn-default #{wishlistBtn}

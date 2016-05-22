@@ -20,25 +20,10 @@ module.exports = {
 	  }
 
       client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
+		//Removed map stuff as there should be no duplicates now.
+        var cart = result.rows;
 
-        // var queryResult = JSON.stringify(result.rows);
-        // var queryResult = JSON.parse(q);
-        
-        //var u_id = current user
-
-        var queryResult = result.rows;
-        var cart = [];
-        var lookupMap = {};
-
-        for (var i in queryResult){
-          lookupMap[queryResult[i].sid] = queryResult[i];
-        }
-
-        for (i in lookupMap){
-          cart.push(lookupMap[i]);
-        }
-
-         var total = '0';
+        var total = '0';
 
         for (i in cart){
           total = +total + +cart[i].price;

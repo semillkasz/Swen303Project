@@ -28,26 +28,54 @@ module.exports = {
 				var p_category = queryResult[0].category;
 				var p_quantity = queryResult[0].quantity;
 
-				client.query("INSERT INTO cart (uid, sid, label, price) " +
-					"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_price + "');",
+				//Search for duplicates
+				client.query("SELECT * FROM cart WHERE uid = " + uid + " AND sid = " + sid + ";",
 					function (error, result) {
-					done();
 					if (error) {
 						console.error('Failed to execute query');
 						console.error(error);
 						return;
 					}
-					// res.redirect(req.get('referer'));
-					res.render('viewProduct', {
-						sid: sid,
-						title : p_label,
-						price : p_price,
-						category : p_category,
-						product_details : p_details,
-						photoSRC : p_url,
-						cartBtn : 'Added to Cart',
-						wishlistBtn : 'Add to Wishlist',
-						user_id : req.cookies.user_id
+
+					//If duplicate found, don't add the item to the shopping cart.
+					if (result.rows.length > 0) {
+						res.render('viewProduct', {
+							sid : sid,
+							title : p_label,
+							price : p_price,
+							category : p_category,
+							product_details : p_details,
+							photoSRC : p_url,
+							cartBtn : 'Add to Cart',
+							wishlistBtn : 'Add to Wishlist',
+							user_id : req.cookies.user_id,
+							reportMsg : 'This item is already in your shopping cart.'
+						});
+						return;
+					}
+
+					client.query("INSERT INTO cart (uid, sid, label, price) " +
+						"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_price + "');",
+						function (error, result) {
+						done();
+						if (error) {
+							console.error('Failed to execute query');
+							console.error(error);
+							return;
+						}
+						// res.redirect(req.get('referer'));
+						res.render('viewProduct', {
+							sid : sid,
+							title : p_label,
+							price : p_price,
+							category : p_category,
+							product_details : p_details,
+							photoSRC : p_url,
+							cartBtn : 'Added to Cart',
+							wishlistBtn : 'Add to Wishlist',
+							user_id : req.cookies.user_id,
+							reportMsg : 'Item added to cart.'
+						});
 					});
 				});
 			});

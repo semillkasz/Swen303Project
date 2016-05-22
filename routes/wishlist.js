@@ -23,17 +23,7 @@ module.exports = {
 			}
 
 			client.query("SELECT * FROM wishlist WHERE uid = " + uid + ";", function (error, result) {
-				var queryResult = result.rows;
-				var list = [];
-				var lookupMap = {};
-
-				for (var i in queryResult) {
-					lookupMap[queryResult[i].sid] = queryResult[i];
-				}
-
-				for (i in lookupMap) {
-					list.push(lookupMap[i]);
-				}
+				var list = result.rows;
 
 				res.render('wishlist', {
 					user_id : req.cookies.user_id,

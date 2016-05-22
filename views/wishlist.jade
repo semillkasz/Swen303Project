@@ -156,8 +156,14 @@ head
          each item in wishlist
            tr
              td 
-               a(href='viewProduct?sid='+item.sid) #{item.label}
+               a(href='viewProduct?sid='+item.sid_item) #{item.label}
              td $ #{item.price}
+     else if user_id == undefined
+       .panel.panel-primary
+         .panel-heading
+           .panel-title Report Message
+         .panel-body(style='padding-top:30px')
+           p You need to be logged in to view your wishlist
      else
        .panel.panel-primary
          .panel-heading
