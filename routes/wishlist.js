@@ -23,6 +23,12 @@ module.exports = {
 			}
 
 			client.query("SELECT * FROM wishlist WHERE uid = " + uid + ";", function (error, result) {
+				if (error) {
+					console.error('Failed to execute query');
+					console.error(error);
+					return;
+				}
+				
 				var list = result.rows;
 
 				res.render('wishlist', {
@@ -30,7 +36,6 @@ module.exports = {
 					title : 'Wishlist',
 					wishlist : list
 				});
-
 			});
 		});
 	}

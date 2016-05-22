@@ -153,11 +153,15 @@ head
          tr
            th Item Name
            th Price
+           th Remove from wish list
          each item in wishlist
            tr
              td 
                a(href='viewProduct?sid='+item.sid_item) #{item.label}
              td $ #{item.price}
+             td
+               form(action='/wishlistDel?sid='+item.sid, method='post') 
+                 button.btn.btn-default Remove
      else if user_id == undefined
        .panel.panel-primary
          .panel-heading

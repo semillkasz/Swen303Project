@@ -9,6 +9,7 @@ var cartView = require('../routes/cartView');
 var cartDel = require('../routes/cartDel');
 var wishlist = require('../routes/wishlist');
 var wishlistAdd = require('../routes/wishlistAdd');
+var wishlistDel = require('../routes/wishlistDel');
 var purchasedItems = require('../routes/purchasedItems');
 
 var pg = require('pg').native;
@@ -192,6 +193,10 @@ router.get('/wishlist', function (req, res) {
 
 router.post('/wishlist', function (req, res) {
 	wishlistAdd.add(req, res, database, pg);
+});
+
+router.post('/wishlistDel', function (req, res) {
+	wishlistDel.delete(req, res, database, pg);
 });
 
 module.exports = router;
