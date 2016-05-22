@@ -70,20 +70,10 @@ module.exports = {
             stockRemaining = +currentStock[0].quantity - +1;
             // console.log(stockRemaining);     
 
-            client.query("UPDATE stock SET quantity = "+ stockRemaining +" WHERE sid = "+ sid+";", function(error, result){});
-          });  
 
         }          
 
-        // for (i in cart){
-        //   var c_sid = cart[i].sid;
-        //   var c_uid = req.cookies.user_id;
-        //   var c_type = PURCHASE;
 
-        //   client.query("INSERT")
-        // }
-
-        //Deletes all items in current user's cart
         client.query("DELETE FROM cart WHERE uid = " + uid + ";", function(error, result){});
 
 

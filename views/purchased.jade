@@ -164,12 +164,11 @@ block body
               tr
                 th Item Name
                 th Price
-                th Quantity
               each item in cart
                 tr
-                  td #{item.label}
+                  td 
+                    a(href='viewProduct?sid='+item.sid) #{item.label}
                   td $ #{item.price}
-                  td #{item.quantity}
           br
           h3 Total: $ #{total}
           h5 Free Shipping storewide
