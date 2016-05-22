@@ -178,7 +178,7 @@ router.get('/shoppingCart', function (req, res) {
 });
 
 router.post('/shoppingCart', function (req, res) {
-	cartDel.delete (req, res, database, pg);
+	cartDel.delete(req, res, database, pg);
 });
 
 /* GET purchased page */

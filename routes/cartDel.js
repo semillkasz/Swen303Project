@@ -13,25 +13,31 @@ module.exports = {
       console.log('Connected to database');
 
       var uid = req.cookies.user_id;
+      var sid = req.query.sid;
 
-      client.query("SELECT * FROM cart WHERE uid = " +uid+" ;", function(error, result){
-        //var u_id = current user
 
-        var queryResult = result.rows;
-        var cart = [];
-        var lookupMap = {};
+      client.query("DELETE FROM cart WHERE sid = " +sid+" AND uid = " + uid + " ;", function(error, result){
 
-        for (var i in queryResult){
-          lookupMap[queryResult[i].sid] = queryResult[i];
-        }
+        client.query("SELECT * FROM cart WHERE uid = " +uid+" ;", function(error, result){
+          done();
+          var queryResult = result.rows;
+          var cart = [];
+          var lookupMap = {};
 
-        for (i in lookupMap){
-          cart.push(lookupMap[i]);
-        }
+          for (var i in queryResult){
+            lookupMap[queryResult[i].sid] = queryResult[i];
+          }
 
-        res.render('shoppingCart', { title: 'Shopping Cart', cart: cart, user_id : req.cookies.user_id});
-        
+          for (i in lookupMap){
+            cart.push(lookupMap[i]);
+          }
+
+          res.render('shoppingCart', { title: 'Shopping Cart', cart: cart, user_id : req.cookies.user_id});
+          
+        });
+
       });
+     
     });
   }
 }

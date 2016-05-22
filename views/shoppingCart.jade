@@ -142,40 +142,40 @@ block body
                   //a#btn-login.btn.btn-success(type='submit') Register 
                   button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
-    .container.text-center
-      .row.content
-        .col-sm-2.sidenav
-        #content.col-sm-8.text-left
-          h1 #{title}
-          .container
-            br
-            if cart != undefined && cart.length > 0
-              table.table.table-hover
-                tr
-                  th Item Name
-                  th Price
-                  th Quantity
-                each item in cart
-                  tr
-                    td #{item.label}
-                    td $ #{item.price}
-                    td #{item.quantity}
-                    td
-                      form(action='/shoppingCart', method='post') 
-                        button.btn.btn-default Delete
+    .container
+      h1 #{title}
+      br
+      .container
+        if cart != undefined && cart.length > 0
+          table.table.table-hover
+            tr
+              th Item Name
+              th Price
+              th Quantity
+            each item in cart
+              tr
+                td 
+                  a(href='viewProduct?sid='+item.sid) #{item.label}
+                td $ #{item.price}
+                td
+                  form(action='/shoppingCart?sid=' + item.sid, method='post') 
+                    button.btn.btn-default Delete
 
-            else
-              br
+        else
+          .panel.panel-primary
+            .panel-heading
+              .panel-title Report Message
+            .panel-body(style='padding-top:30px')
               p No items in Shopping Cart
 
-              
-      .row
-        .col-sm-12.text-center
+
+      .col-md-12.text-center
         if cart != undefined && cart.length > 0
           h4 Total $ #{total}
           br
           form(action='/purchased') 
             button.btn.btn-default Purchase Items  
+
            
   
 
