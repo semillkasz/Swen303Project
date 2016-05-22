@@ -1,18 +1,27 @@
 doctype html
 html
 head
-  meta(charset='utf-8')
-  title  Online Shopping System - Main Project
-  link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
-  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
-
-  link(rel='stylesheet', type='text/css', href='style.css')
-  script(language='Javascript', src='index.js')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Online Shopping System | Account
+    // Bootstrap Core CSS
+    link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    // Custom CSS
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    //Sliers Style
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick-theme.css')
+    script(src='//code.jquery.com/jquery-1.11.0.min.js')
+    script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(src='javascripts/slick.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', href='style.css')
 
 block body
     
@@ -162,35 +171,39 @@ block body
           img.featurette-image.img-responsive.center-block(src='#{photoSRC}')
     
       .container-fluid
-        .row
-        .col-lg-12
-            h2.page-header Recently Bought
-            .dave
+          .row
+            .col-lg-12
+              h2.page-header Recently Bought
+              .dave
                 .slider-data
-                    .multiple-items(style='margin: auto; width: 100%;')
-                        -var a=0
-                        each val in boughtItems
-                            -a++
-                            -var imageURL = boughtItems[a-1].photourl;
-                            -var imageSID = boughtItems[a-1].sid;
-                            a(href='/viewProduct' + "?sid=" + imageSID)
-                                img(src= "" + imageURL, width='200', height='200')
+                  .multiple-items(style='margin: auto; width: 100%;')
+                  if(boughtItems==undefined || boughtItems.length == 0)
+                    p No items recently purchased.
+                  else
+                    -var a=0
+                    each val in boughtItems
+                      -a++
+                      -var imageURL = boughtItems[a-1].photourl;
+                      -var imageSID = boughtItems[a-1].sid;
+                      a(href='/viewProduct' + "?sid=" + imageSID)
+                        img(src=imageURL)
       
-        .row
-          .col-lg-12
-            h2.page-header Items For Sale
-            .dave
+          .row
+            .col-lg-12
+              h2.page-header Items For Sale
+              .dave
                 .slider-data
-                    .multiple-items(style='margin: auto; width: 100%;')
-                        -var a=0
-                        if(slider_data=='')
-                          p No items for sale
-                        each val in slider_data
-                            -a++
-                            -var imageURL = slider_data[a-1].photourl;
-                            -var imageSID = slider_data[a-1].sid;
-                            a(href='/viewProduct' + "?sid=" + imageSID)
-                                img(src= "" + imageURL)
+                  .multiple-items(style='margin: auto; width: 100%;')
+                  if(itemsForSale==undefined || itemsForSale.length == 0)
+                    p No items for sale
+                  else
+                    -var a=0  
+                    each val in itemsForSale
+                      -a++
+                      -var imageURL = itemsForSale[a-1].photourl;
+                      -var imageSID = itemsForSale[a-1].sid;
+                       a(href='/viewProduct' + "?sid=" + imageSID)
+                         img(src=imageURL)
     hr 
     // Site footer
     footer.footer
