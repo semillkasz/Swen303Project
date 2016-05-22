@@ -13,11 +13,11 @@ module.exports = {
       console.log('Connected to database');
 
       var uid = req.cookies.user_id;
-	  
-	  if(uid == undefined){		
-		res.redirect('/');
-		return;
-	  }
+    
+    if(uid == undefined){   
+    res.redirect('/');
+    return;
+    }
 
       client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
 
@@ -42,42 +42,42 @@ module.exports = {
         var stockRemaining = '0';
 
         for (i in cart){
-          total = +total + +cart[i].price;
-
-          // client.query("SELECT quantity FROM stock WHERE sid = "+ cart[i].sid+";", function(error, result){
-          //   var currentStock = JSON.parse(JSON.stringify(result.rows));
-          //   // console.log(stock[0].quantity);
-            
-          //   stockRemaining = +currentStock[0].quantity - +1;
-          //   // console.log(stockRemaining);     
-
-          //   client.query("UPDATE stock SET quantity = "+ stockRemaining +" WHERE sid = "+ cart[i].sid+";", function(error, result){});
-
-          // });          
+          total = +total + +cart[i].price;     
         }      
 
         for (var i = +0; i < cart.length; +i++){
-          console.log("Testing: " + i);
           var sid = cart[i].sid;
-          console.log("Stock ID: "+ sid);
           
           client.query("SELECT quantity FROM stock WHERE sid = "+ sid+";", function(error, result){
 
             done();
             var currentStock = JSON.parse(JSON.stringify(result.rows));
-            // console.log(stock[0].quantity);
-            // console.log("Stock ID: "+ sid);
             stockRemaining = +currentStock[0].quantity - +1;
-            // console.log(stockRemaining);     
+  
+            //Reduce stock quantity by 1
+            client.query("UPDATE stock SET quantity = "+ stockRemaining +" WHERE sid = "+ sid+";", function(error, result){});}); 
+
+            //Add the purchased items to the transactions table
+            client.query("SELECT photourl FROM stock WHERE sid = " +sid +";", function(error, result){
+              var photourlResult = result.rows;
+
+              client.query("INSERT INTO transactions (sid, uid, type, photourl) " +
+                "VALUES("+sid+", "+uid+", 'PURCHASE', '" + photourlResult[0].photourl + "');",
+                function(error, result){
+                done();
+                if(error){
+                  console.error('Failed to execute query');
+                  console.error(error);
+                  return;
+              }}); 
+            });      
+
 
 
         }          
 
-
+        //Delete all items in user's cart
         client.query("DELETE FROM cart WHERE uid = " + uid + ";", function(error, result){});
-
-
-
 
         res.render('purchased', { title: 'Thank you for shopping with us!', cart: cart, total: total, user_id : req.cookies.user_id});
       });
