@@ -195,7 +195,10 @@ block body
          p #{reportMsg}
       .row
         #productImg.col-md-4
-         img(src='#{photoSRC}')
+         if photoSRC == ' '
+          img(src="http://www.buchmann.ch/catalog/images/images_med/no-som-image.jpg")
+         else 
+          img(src='#{photoSRC}')
          #addCartBtn.col-sm-12
          if noStock
           p Sorry this item is no longer available

@@ -58,20 +58,19 @@ module.exports = {
 
         for (var i = +0; i < cart.length; +i++){
           console.log("Testing: " + i);
-          var c_sid = cart[i].sid;
-          console.log("Stock ID: "+ c_sid);
+          var sid = cart[i].sid;
+          console.log("Stock ID: "+ sid);
           
-          client.query("SELECT quantity FROM stock WHERE sid = "+ c_sid+";", function(error, result){
+          client.query("SELECT quantity FROM stock WHERE sid = "+ sid+";", function(error, result){
 
             done();
             var currentStock = JSON.parse(JSON.stringify(result.rows));
             // console.log(stock[0].quantity);
-            console.log("Stock ID: "+ c_sid);
+            // console.log("Stock ID: "+ sid);
             stockRemaining = +currentStock[0].quantity - +1;
             // console.log(stockRemaining);     
 
-            client.query("UPDATE stock SET quantity = "+ stockRemaining +" WHERE sid = "+ c_sid+";", function(error, result){});
-            
+            client.query("UPDATE stock SET quantity = "+ stockRemaining +" WHERE sid = "+ sid+";", function(error, result){});
           });  
 
         }          
