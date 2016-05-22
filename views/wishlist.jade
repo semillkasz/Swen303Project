@@ -1,4 +1,5 @@
 doctype html
+//extends ../node_modules/jade-bootstrap/_bootstrap
 html
 head
   meta(charset='utf-8')
@@ -14,7 +15,8 @@ head
   link(rel='stylesheet', type='text/css', href='style.css')
   script(language='Javascript', src='index.js')
 
-block body
+  block body
+    
     .container-fluid
       header
         nav.navbar.navbar-default.navbar-fixed-top
@@ -68,7 +70,7 @@ block body
               input.form-control(type='text', placeholder='Email...', name='email')
             .form-group
               button.btn.btn-primary Submit
-                                
+
     // Login Box         
     #loginBox.modal
       .modal-dialog
@@ -105,7 +107,7 @@ block body
                         button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
 
 
-      // Sign Up Box
+    // Sign Up Box
     #signUpBox.modal
       .modal-dialog
         .modal-content
@@ -116,7 +118,7 @@ block body
             span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
             h4(style='float:left') Sign Up
           .modal-body
-            form#registrationForm.form-horizontal(method='post' action='signUp')
+            form#registrationForm.form-horizontal(method='post' action='/')
               .form-group
                 label.control-label.col-md-4(for='fullname') Full Name
                 .col-md-7.col-md-offset-1
@@ -142,33 +144,23 @@ block body
                   //a#btn-login.btn.btn-success(type='submit') Register 
                   button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
-    .container.text-center
-      .row.content
-        .col-sm-2.sidenav
-        #content.col-sm-8.text-left
-          h1 #{title}
-          br
-          p You have purchased the following items:
-          br
-          if cart != undefined && cart.length > 0
-            table.table.table-hover
-              tr
-                th Item Name
-                th Price
-                th Quantity
-              each item in cart
-                tr
-                  td #{item.label}
-                  td $ #{item.price}
-                  td #{item.quantity}
-          br
-          h3 Total: $ #{total}
-          h5 Free Shipping storewide
-
-           
-  
-
-    .navbar.navbar-default.navbar-fixed-bottom
-      .container
-        p.navbar-text.pull-left © Online Shopping System
-
+ .container
+   h1= title
+   br
+   .container
+     if wishlist != undefined && wishlist.length > 0
+       table.table.table-hover
+         tr
+           th Item Name
+           th Price
+         each item in wishlist
+           tr
+             td 
+               a(href='viewProduct?sid='+item.sid) #{item.label}
+             td $ #{item.price}
+     else
+       .panel.panel-primary
+         .panel-heading
+           .panel-title Report Message
+         .panel-body(style='padding-top:30px')
+           p Wishlist is empty.

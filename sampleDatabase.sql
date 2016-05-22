@@ -54,6 +54,21 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE wishlist (
+	sid integer NOT NULL,
+	uid integer,
+	sid_item integer,
+	label character varying(100), 
+	price numeric(10,2)
+);
+
+CREATE SEQUENCE wishlist_sid_seq
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
+
 CREATE TABLE cart (
 	uid integer, 
 	sid integer, 
@@ -158,6 +173,8 @@ CREATE SEQUENCE users_uid_seq
 	CACHE 1;
 
 
+ALTER TABLE ONLY wishlist ALTER COLUMN sid SET DEFAULT nextval('wishlist_sid_seq'::regclass);	
+	
 --
 -- Name: users_uid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
