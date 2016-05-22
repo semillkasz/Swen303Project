@@ -169,11 +169,14 @@ head
              a(href='search?searchString='+searchString+'&sort=high') Highest to lowest price
        table.table.table-hover
          tr
+           th Image
            th Item Name
            th Price
            th Stock
          each item in listings
            tr
+             td(width='30%')
+               img(src='#{item.photourl}', style='width: 50%;')
              td 
                a(href='viewProduct?sid='+item.sid) #{item.label}
              td $ #{item.price}

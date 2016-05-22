@@ -114,8 +114,6 @@ router.post('/login', function (req, res, next) {
 			}
 			var passwordSearch = result.rows[0].password;
 			var uid = result.rows[0].uid;
-			console.log(password)
-			console.log(passwordSearch)
 			if (password.toString() === passwordSearch.toString()) {
 				res.cookie('user_id', uid, {
 					maxAge : 999999999999999

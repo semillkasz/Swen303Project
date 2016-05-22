@@ -160,11 +160,14 @@ head
      if wishlist != undefined && wishlist.length > 0
        table.table.table-hover
          tr
+           th Image
            th Item Name
            th Price
            th Remove from wish list
          each item in wishlist
            tr
+             td(width='30%')
+               img(src='#{item.photourl}', style='width: 50%;')
              td 
                a(href='viewProduct?sid='+item.sid_item) #{item.label}
              td $ #{item.price}

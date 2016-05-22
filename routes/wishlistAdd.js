@@ -60,8 +60,8 @@ module.exports = {
 							return;
 						}
 
-						client.query("INSERT INTO wishlist (uid, sid_item, label, price) " +
-							"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_price + "');",
+						client.query("INSERT INTO wishlist (uid, sid_item, label, photourl, price) " +
+							"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_url + "', '" + p_price + "');",
 							function (error, result) {
 							done();
 							if (error) {

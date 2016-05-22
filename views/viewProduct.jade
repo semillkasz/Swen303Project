@@ -1,18 +1,27 @@
 doctype html
 html
 head
-  meta(charset='utf-8')
-  title  Online Shopping System - Main Project
-  link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
-  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
-
-  link(rel='stylesheet', type='text/css', href='style.css')
-  script(language='Javascript', src='index.js')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Online Shopping System | View product
+    // Bootstrap Core CSS
+    link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    // Custom CSS
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    //Sliers Style
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick-theme.css')
+    script(src='//code.jquery.com/jquery-1.11.0.min.js')
+    script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(src='javascripts/slick.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', href='style.css')
 
 
 block body
@@ -195,7 +204,7 @@ block body
          p #{reportMsg}
       .row
         #productImg.col-md-4
-         img(src='#{photoSRC}')
+         img(src='#{photoSRC}', style='margin: auto; width: 100%;')
          #addCartBtn.col-sm-12
          if noStock
           p Sorry this item is no longer available

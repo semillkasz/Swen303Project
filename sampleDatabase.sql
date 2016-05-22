@@ -59,6 +59,7 @@ CREATE TABLE wishlist (
 	uid integer,
 	sid_item integer,
 	label character varying(100), 
+	photourl character varying(200),
 	price numeric(10,2)
 );
 
