@@ -9,7 +9,6 @@ module.exports = {
 				console.error(err);
 				return;
 			}
-			console.log('Connected to database');
 
 			var sid = req.query.sid;
 
@@ -24,14 +23,6 @@ module.exports = {
 				var p_url = queryResult[0].photourl;
 				var p_category = queryResult[0].category;
 				var p_quantity = queryResult[0].quantity;
-
-				//Testing
-				console.log(p_label);
-				console.log(p_details);
-				console.log(p_price);
-				console.log(p_url);
-				console.log(p_category);
-				console.log(p_quantity);
 
 				if (p_quantity <= 5 && p_quantity > 1) {
 					res.render('viewProduct', {

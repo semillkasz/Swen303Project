@@ -10,7 +10,6 @@ module.exports = {
 				console.error(err);
 				return;
 			}
-			console.log('Connected to database');
 
 			var sid = req.query.sid;
 			var uid = req.cookies.user_id;
@@ -21,8 +20,6 @@ module.exports = {
 			}
 
 			client.query("SELECT * FROM stock WHERE sid = " + sid + ";", function (error, result) {
-
-				console.log(result);
 
 				var q = JSON.stringify(result.rows);
 				var queryResult = JSON.parse(q);

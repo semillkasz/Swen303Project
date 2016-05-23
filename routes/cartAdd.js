@@ -10,7 +10,6 @@ module.exports = {
 				console.error(err);
 				return;
 			}
-			console.log('Connected to database');
 
 			var sid = req.query.sid;
 
@@ -63,7 +62,7 @@ module.exports = {
 							console.error(error);
 							return;
 						}
-						// res.redirect(req.get('referer'));
+
 						res.render('viewProduct', {
 							sid : sid,
 							title : p_label,

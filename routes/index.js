@@ -33,7 +33,6 @@ router.get('/', function (req, res, next) {
 			console.error(err);
 			return;
 		}
-		console.log('Connected to database');
 		client.query("SELECT * FROM stock",
 			function (error, result) {
 			done();
@@ -41,7 +40,6 @@ router.get('/', function (req, res, next) {
 				slider_data : result.rows,
 				user_id : req.cookies.user_id
 			});
-			console.log(result.rows);
 		});
 
 	});
@@ -53,14 +51,12 @@ router.get('/removeCookie', function (req, res) {
 });
 
 router.post('/', function (req, res, next) {
-	console.log("Signing up")
 	pg.connect(database, function (err, client, done) {
 		if (err) {
 			console.error('Could not connect to the database');
 			console.error(err);
 			return;
 		}
-		console.log('Connected to database');
 
 		var fullName = req.body.fname;
 		var userName = req.body.username;
@@ -70,7 +66,6 @@ router.post('/', function (req, res, next) {
 
 		//Error check to make sure fields were filled in
 		if (fullName.length == 0 || userName.length == 0 || password.length == 0 || email.length == 0 || photoURL.length == 0) {
-			console.log("Error length")
 			res.render('index', {
 				reportMsg : 'Error: make sure all fields are filled in correctly.'
 			});
@@ -93,14 +88,13 @@ router.post('/', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-	console.log("Logging In")
 	pg.connect(database, function (err, client, done) {
 		if (err) {
 			console.error('Could not connect to the database');
 			console.error(err);
 			return;
 		}
-		console.log('Connected to database');
+
 		var username = req.body.username;
 		var password = req.body.password;
 
@@ -114,17 +108,14 @@ router.post('/login', function (req, res, next) {
 			}
 			var passwordSearch = result.rows[0].password;
 			var uid = result.rows[0].uid;
-			console.log(password)
-			console.log(passwordSearch)
 			if (password.toString() === passwordSearch.toString()) {
 				res.cookie('user_id', uid, {
 					maxAge : 999999999999999
 				});
-				//res.render('index', {slider_data: slider_data, user_id : req.cookies.user_id});
+
 				res.redirect('/');
 				return;
 			} else {
-				console.log("here");
 				res.redirect('/');
 
 				return;
