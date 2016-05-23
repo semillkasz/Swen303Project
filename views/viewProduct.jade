@@ -62,6 +62,8 @@ block body
                 li
                   a(href='/account') Profile
                 li
+                  a(href='/wishlist') Wishlist
+                li
                   a(href='/removeCookie') Logout
     // Forgot Password Box 
     #forgotPasswordBox.modal
@@ -195,15 +197,38 @@ block body
 
 
     .container.text-justified
+      if reportMsg != undefined
+       br
+       .panel.panel-primary
+        .panel-heading
+         .panel-title Report Message
+        .panel-body(style='padding-top:30px')
+         p #{reportMsg}
       .row
         #productImg.col-md-4
-         img(src='#{photoSRC}')
+         if photoSRC == ' '
+          img(src="http://www.buchmann.ch/catalog/images/images_med/no-som-image.jpg")
+         else 
+          img(src='#{photoSRC}', style='margin: auto; width: 100%;')
          #addCartBtn.col-sm-12
          if noStock
           p Sorry this item is no longer available
          else
+
           form(action='', method='post') 
            button.btn.btn-default #{cartBtn}
+
+          if user_id == undefined
+           form(action='/viewProduct?sid='+sid, method='post') 
+            button.btn.btn-default.disabled #{cartBtn}
+           p Log in or create an account to add items to the cart.
+          else
+           form(action='/viewProduct?sid='+sid, method='post') 
+            button.btn.btn-default #{cartBtn}
+           form(action='/wishlist?sid='+sid, method='post') 
+            button.btn.btn-default #{wishlistBtn}
+
+
         #productDetails.col-md-8
          h3 #{title} 
          h6 tags: #{category} 

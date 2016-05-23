@@ -11,32 +11,39 @@ module.exports = {
 			}
 			console.log('Connected to database');
 			
+			var uid = req.cookies.user_id;
+			
 			var label = req.body.label;
 			var price = req.body.price;
 			var quantity = req.body.quantity;
 			var category = req.body.category;
+			var description = req.body.description;
+			var photourl = req.body.photourl;
 			
 			//Error check to make sure fields were filled in
-			if(label.length == 0 || price.length == 0 || quantity.length == 0 || category.length == 0){
+			if(label.length == 0 || price.length == 0 || quantity.length == 0 || category.length == 0 || description.length == 0){
 				res.render('createlisting', { title: 'SWEN Shop | create listing', 
-											reportMsg: 'Error: make sure all fields are filled in correctly.'});
+											reportMsg: 'Error: make sure all fields are filled in correctly.',
+											user_id : req.cookies.user_id});
 				return;
 			}
 			
 			//Error check to see if price and quantity are numbers
 			if(isNaN(price)){
 				res.render('createlisting', { title: 'SWEN Shop | create listing', 
-											reportMsg: 'Error: price is not a number.'});
+											reportMsg: 'Error: price is not a number.',
+											user_id : req.cookies.user_id});
 				return;
 			} else if (isNaN(quantity)){
 				res.render('createlisting', { title: 'SWEN Shop | create listing', 
-											reportMsg: 'Error: quantity is not a number.'});
+											reportMsg: 'Error: quantity is not a number.',
+											user_id : req.cookies.user_id});
 				return;
 			}
 			
 			//Add the item to the stock table
-			client.query("INSERT INTO stock (uid, label, price, quantity, category) " +
-				"VALUES(1,'"+label+"', "+price+", "+quantity+", '"+category+"');", //UID will be different when accounts is finished
+			client.query("INSERT INTO stock (uid, label, price, quantity, category, photourl, description) " +
+				"VALUES("+uid+", '"+label+"', "+price+", "+quantity+", '"+category+"', '"+photourl+"', '"+description+"');",
 			function(error, result){
 				done();
 				if(error){
@@ -46,7 +53,8 @@ module.exports = {
 				}
 				//Change this to link to the item page eventually.
 				res.render('createlisting', { title: 'SWEN Shop | create listing', 
-											reportMsg: 'Item put up for listing successfully.'});
+											reportMsg: 'Item put up for listing successfully.',
+											user_id : req.cookies.user_id});
 			});
 		});
 	}

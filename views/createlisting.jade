@@ -1,6 +1,7 @@
 doctype html
 html
 head
+<<<<<<< HEAD
   meta(charset='utf-8')
   title  Online Shopping System - Main Project
   link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
@@ -22,6 +23,34 @@ head
 block body
     
     .container-fluid(style='padding:0px;')
+=======
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Online Shopping System | Create listing
+    // Bootstrap Core CSS
+    link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    // Custom CSS
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    //Sliers Style
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/slick-theme.css')
+    script(src='//code.jquery.com/jquery-1.11.0.min.js')
+    script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(src='javascripts/slick.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', href='style.css')
+
+
+block body
+    
+    .container-fluid
+>>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
       header
        .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
@@ -55,6 +84,11 @@ block body
                 li
                   a(href='/account') Profile
                 li
+<<<<<<< HEAD
+=======
+                  a(href='/wishlist') Wishlist
+                li
+>>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
                   a(href='/removeCookie') Logout
     // Forgot Password Box 
     #forgotPasswordBox.modal
@@ -110,6 +144,7 @@ block body
 
 
     // Sign Up Box
+<<<<<<< HEAD
     #signUpBox.modal
       .modal-dialog
         .modal-content
@@ -149,6 +184,8 @@ block body
 
 
       // Sign Up Box
+=======
+>>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
     #signUpBox.modal
       .modal-dialog
         .modal-content
@@ -159,7 +196,7 @@ block body
             span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
             h4(style='float:left') Sign Up
           .modal-body
-            form#registrationForm.form-horizontal(method='post' action='signUp')
+            form#registrationForm.form-horizontal(method='post' action='/')
               .form-group
                 label.control-label.col-md-4(for='fullname') Full Name
                 .col-md-7.col-md-offset-1
@@ -188,15 +225,46 @@ block body
 
 .container
  h1= title
- if reportMsg != undefined
- alert-info(reportMsg)
- form(action='/createlisting', method='post')
-  input(type="text", name="label", placeholder="Listing name")
-  br
-  input(type="text", name="price", placeholder="Price")
-  br
-  input(type="text", name="quantity", placeholder="Quantity")
-  br
-  input(type="text", name="category", placeholder="Category")
-  br
-  button.btn.btn-default(type="submit") Create listing
+ if user_id == undefined  
+   .panel.panel-primary
+      .panel-heading
+        .panel-title Report Message
+      .panel-body(style='padding-top:30px')
+        p You need to be logged in to create a listing for sale.
+ else
+   if reportMsg != undefined
+    .panel.panel-primary
+      .panel-heading
+        .panel-title Report Message
+      .panel-body(style='padding-top:30px')
+        p #{reportMsg}
+   form.form-horizontal(action='/createlisting', method='post')
+     .form-group
+       label.control-label.col-md-2(for='label') Listing Name
+       .col-md-7
+         input.form-control(type='text', name='label', placeholder='Listing name..')
+     .form-group
+       label.control-label.col-md-2(for='price') Price
+       .col-md-7
+         input.form-control(type='text', name='price', placeholder='Price..')
+     .form-group
+       label.control-label.col-md-2(for='quantity') Quantity
+       .col-md-7
+         input.form-control(type='text', name='quantity', placeholder='Quantity..')
+     .form-group
+       label.control-label.col-md-2(for='category') Category
+       .col-md-7
+         input.form-control(type='text', name='category', placeholder='Category..')
+     .form-group
+       label.control-label.col-md-2(for='description') Description
+       .col-md-7
+         textarea(type='text', name='description', rows='20', cols='80', placeholder='Description..')
+     .form-group
+       label.control-label.col-md-2(for='photourl') Photo URL (optional)
+       .col-md-7
+         input.form-control(type='text', name='photourl', placeholder='Photo URL..')
+         h5 
+          i *Photo size must be within 400px by 400px
+     .form-group
+       .col-md-7.col-md-offset-2
+         button.btn.btn-default(type="submit") Create listing

@@ -1,24 +1,13 @@
 doctype html
+//extends ../node_modules/jade-bootstrap/_bootstrap
 html
 head
-<<<<<<< HEAD
-  meta(charset='utf-8')
-  title  Online Shopping System - Main Project
-  link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-
-  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
-
-  link(rel='stylesheet', type='text/css', href='style.css')
-  script(language='Javascript', src='index.js')
-=======
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Online Shopping System | Account
+    title Online Shopping System | Wishlist
     // Bootstrap Core CSS
     link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
@@ -34,9 +23,8 @@ head
     script(src='javascripts/slick.min.js')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     link(rel='stylesheet', type='text/css', href='style.css')
->>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
 
-block body
+  block body
     
     .container-fluid
       header
@@ -165,61 +153,36 @@ block body
                   //a#btn-login.btn.btn-success(type='submit') Register 
                   button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
                   button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
-      
-    if user_id == undefined
-      .panel.panel-primary
-        .panel-heading
-          .panel-title Report Message
-        .panel-body(style='padding-top:30px')
-          p You need to be logged in to view the accounts page.	
-    else
-      hr           
-      .row.featurette
-        .col-md-7.col-md-push-5
-          h2.featurette-heading #{realname}
-          p.lead #{address}
-          p.lead #{rating}/5
-          h5 "#{feedback}"
-        .col-md-3.col-md-pull-5
-          img.featurette-image.img-responsive.center-block(src='#{photoSRC}', style='margin: auto; width: 100%;')
-    
-      .container-fluid
-          .row
-            .col-lg-12
-              h2.page-header Recently Bought
-              .dave
-                .slider-data
-                  .multiple-items(style='margin: auto; width: 100%;')
-                  if(boughtItems==undefined || boughtItems.length == 0)
-                    p No items recently purchased.
-                  else
-                    -var a=0
-                    each val in boughtItems
-                      -a++
-                      -var imageURL = boughtItems[a-1].photourl;
-                      -var imageSID = boughtItems[a-1].sid;
-                      a(href='/viewProduct' + "?sid=" + imageSID)
-                        img(src=imageURL)
-      
-          .row
-            .col-lg-12
-              h2.page-header Items For Sale
-              .dave
-                .slider-data
-                  .multiple-items(style='margin: auto; width: 100%;')
-                  if(itemsForSale==undefined || itemsForSale.length == 0)
-                    p No items for sale
-                  else
-                    -var a=0  
-                    each val in itemsForSale
-                      -a++
-                      -var imageURL = itemsForSale[a-1].photourl;
-                      -var imageSID = itemsForSale[a-1].sid;
-                       a(href='/viewProduct' + "?sid=" + imageSID)
-                         img(src=imageURL)
-    hr 
-    // Site footer
-    footer.footer
-      p © SWEN303 2016
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+ .container
+   h1= title
+   br
+   .container
+     if wishlist != undefined && wishlist.length > 0
+       table.table.table-hover
+         tr
+           th Image
+           th Item Name
+           th Price
+           th Remove from wish list
+         each item in wishlist
+           tr
+             td(width='30%')
+               img(src='#{item.photourl}', style='width: 55%;')
+             td 
+               a(href='viewProduct?sid='+item.sid_item) #{item.label}
+             td $ #{item.price}
+             td
+               form(action='/wishlistDel?sid='+item.sid, method='post') 
+                 button.btn.btn-default Remove
+     else if user_id == undefined
+       .panel.panel-primary
+         .panel-heading
+           .panel-title Report Message
+         .panel-body(style='padding-top:30px')
+           p You need to be logged in to view your wishlist
+     else
+       .panel.panel-primary
+         .panel-heading
+           .panel-title Report Message
+         .panel-body(style='padding-top:30px')
+           p Wishlist is empty.
