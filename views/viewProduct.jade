@@ -4,22 +4,33 @@ head
   meta(charset='utf-8')
   title  Online Shopping System - Main Project
   link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
   script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
 
   script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
 
   link(rel='stylesheet', type='text/css', href='style.css')
   script(language='Javascript', src='index.js')
+  style(type='text/css').
+      textarea.form-control {
+      max-width: 100%;
+      max-height: 121px;
+      }
+      body{
+      padding: 0px !important;
+      margin: 0px !important;
+      }
+      .mans::-webkit-scrollbar {
+      width:1px;
+      }.mans::-moz-scrollbar {
+      width:1px;
+      }
 
 
 block body
     
-    .container-fluid
+    .container-fluid(style='padding:0px;')
       header
-        nav.navbar.navbar-default.navbar-fixed-top
+        .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
             // Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -193,7 +204,6 @@ block body
          else
           form(action='', method='post') 
            button.btn.btn-default #{cartBtn}
-
         #productDetails.col-md-8
          h3 #{title} 
          h6 tags: #{category} 
@@ -203,9 +213,29 @@ block body
          br
          p  #{product_details} 
 
-           //Will do reviews later?
+      // Reviews                              
+          .row(style='padding-top:10px;')
+      .col-xs-8.col-s-8.col-md-8.col-lg-8.mans(style='padding:10px; border: 1px solid #ccc; border-radius:3px; max-height:250px; overflow:scroll;float:right;')
+        .panel.panel-default
+          h2 Reviews
+          each val in review_data
+            .panel-heading
+              | Subject: #{val.title}  
+              span.label.label-default(style='float:right;') User: #{val.username}
+            .panel-body
+              | #{val.description}
 
-    .navbar.navbar-default.navbar-fixed-bottom
+      .col-xs-8.col-s-8.col-md-8.col-lg-8.list-group-item(style='margin-top:10px;padding:10px; border-radius:3px; float:right;')
+        form.form-horizontal(method='post' action='review?sid='+sid)
+          .form-group
+            label.col-sm-2.control-label(for='title') Subject
+            .col-sm-10
+              input#inputEmail3.form-control(name = 'title')
+              textarea.form-control(rows='5', style='margin:10px 0px 0px 0px;', name = 'description')
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default(type='submit') Submit
+
+    .navbar.navbar-default.navbar-bottom(style='width: 100%; padding: 0px !important; margin: 15px 0px 0px 0px !important;')
       .container
         p.navbar-text.pull-left © Online Shopping System
-

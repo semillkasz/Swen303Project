@@ -4,20 +4,26 @@ head
   meta(charset='utf-8')
   title  Online Shopping System - Main Project
   link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
 
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
   script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
 
   script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
 
   link(rel='stylesheet', type='text/css', href='style.css')
   script(language='Javascript', src='index.js')
-
+  style(type='text/css').
+    h2{
+    font-size:27px !important;
+    }      
+    body{
+    padding: 0px !important;
+    margin: 0px !important;
+    }
 block body
-    .container-fluid
+    
+    .container-fluid(style='padding:0px;')
       header
-        nav.navbar.navbar-default.navbar-fixed-top
+       .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
             // Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -33,10 +39,6 @@ block body
               li
                 a(href='/categories') Categories
               li
-                a(href='/createlisting') Create Listing
-              li
-                a(href='/account') Profile
-              li
                form.navbar-form.navbar-right(action = "/shoppingCart")
                 button.btn.btn-default Shopping Cart  
               li
@@ -44,14 +46,16 @@ block body
                 .form-group
                  input.form-control(type='text', placeholder='Search', name = "searchString")
                 button.btn.btn-default(type='submit') Search
-              li(data-toggle='modal', data-target='#loginBox')
-                a(href='#login')
-                  span.ion.ion-person(style='margin-right:5px; font-size:120%;')
-                  | Login
-              li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
-                a
-                  span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
-                  | Sign Up
+              if user_id == undefined  
+                <li data-toggle="modal" data-target="#loginBox"><a href="#login"><span style="margin-right:5px; font-size:120%;" class="ion ion-person"></span>Login</a></li>
+                <li data-toggle="modal" data-target="#signUpBox" style="cursor:pointer;"><a><span style="margin-right:5px; font-size:120%;" class="ion ion-person-add"></span>Sign Up</a></li>
+              else 
+                li
+                  a(href='/createListing') Create Listing
+                li
+                  a(href='/account') Profile
+                li
+                  a(href='/removeCookie') Logout
     // Forgot Password Box 
     #forgotPasswordBox.modal
       .modal-dialog
@@ -68,7 +72,7 @@ block body
               input.form-control(type='text', placeholder='Email...', name='email')
             .form-group
               button.btn.btn-primary Submit
-                                
+
     // Login Box         
     #loginBox.modal
       .modal-dialog
@@ -88,21 +92,60 @@ block body
                     a(href='#', style='color:white;') Forgot password?
                 .panel-body(style='padding-top:30px')
                   #login-alert.alert.alert-danger.col-sm-12(style='display:none')
-                  form#loginform.form-horizontal(method='post' action='index')
+                  form#loginform.form-horizontal(method='post' action="login")
                     .form-group
                       label.col-md-4.control-label(for='username') Username
                       .col-md-7.col-md-offset-1
                         input#pass.form-control(type='username', name='username', placeholder='Username')                   
                     .form-group
-                      label.col-md-4.control-label(for='pass') Password
+                      label.col-md-4.control-label(for='password') Password
                       .col-md-7.col-md-offset-1
-                        input#pass.form-control(type='password', name='pass', placeholder='Password...')
+                        input#pass.form-control(type='password', name='password', placeholder='Password...')
                  
                     .form-group
                       .col-md-7.col-md-offset-4
                         //a#btn-login.btn.btn-success(type='submit') Register 
-                        button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Login
+                        button#register1.btn.btn-success(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Login
                         button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
+
+
+    // Sign Up Box
+    #signUpBox.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true')
+                span.glyphicon.glyphicon-remove
+            span.ion.ion-person-add(style='float: left; font-size: 150%; margin: 5px 10px 0px 0px;')
+            h4(style='float:left') Sign Up
+          .modal-body
+            form#registrationForm.form-horizontal(method='post' action='/')
+              .form-group
+                label.control-label.col-md-4(for='fullname') Full Name
+                .col-md-7.col-md-offset-1
+                  input#name1.form-control(type='text', name='fname', placeholder='Full Name...')
+              .form-group
+                label.control-label.col-md-4(for='username') User Name
+                .col-md-7.col-md-offset-1
+                  input#last.form-control(type='text', name='username', placeholder='Username...')
+              .form-group
+                label.col-md-4.control-label(for='email') Email
+                .col-md-7.col-md-offset-1
+                  input#email.form-control(type='email', name='email', placeholder='Email...')
+              .form-group
+                label.col-md-4.control-label(for='pass') Password
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='password', name='pass', placeholder='Password...')
+              .form-group
+                label.col-md-4.control-label(for='imageURL') ImageURL
+                .col-md-7.col-md-offset-1
+                  input#pass.form-control(type='imageURL', name='imageURL', placeholder='Image URL')                  
+              .form-group
+                .col-md-7.col-md-offset-4
+                  //a#btn-login.btn.btn-success(type='submit') Register 
+                  button#register1.btn.btn-warning(style='color:#555555;font-weight:bold;margin-left:35px;', type='submit') Register
+                  button#close.btn.btn-primary(style='font-weight:bold', type='button', data-dismiss='modal') Close
 
 
       // Sign Up Box

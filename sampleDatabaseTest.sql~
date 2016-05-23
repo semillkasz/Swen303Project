@@ -54,17 +54,27 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE cart (
+	uid integer, 
+	sid integer, 
+	label character varying(100), 
+	price numeric(10,2)
+	-- quantity integer
+);
+
 --
 -- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE stock (
-    sid integer NOT NULL,
-    uid integer,
-    label character varying(100),
-    price numeric(10,4),
-    quantity integer,
-	category character varying(100)
+	sid integer NOT NULL,
+	uid integer,
+	label character varying(100),
+	price numeric(10,2),
+	quantity integer,
+	category character varying(100),
+	photourl character varying(200), 
+	description character varying(500)
 );
 
 
@@ -73,11 +83,11 @@ CREATE TABLE stock (
 --
 
 CREATE SEQUENCE stock_sid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -92,10 +102,11 @@ ALTER SEQUENCE stock_sid_seq OWNED BY stock.sid;
 --
 
 CREATE TABLE transactions (
-    tid integer NOT NULL,
-    sid integer,
-    uid integer,
-    type character varying(10)
+	tid integer NOT NULL,
+	sid integer,
+	uid integer,
+	type character varying(10),
+	photourl character varying(200)
 );
 
 
@@ -104,11 +115,11 @@ CREATE TABLE transactions (
 --
 
 CREATE SEQUENCE transactions_tid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -123,10 +134,24 @@ ALTER SEQUENCE transactions_tid_seq OWNED BY transactions.tid;
 --
 
 CREATE TABLE users (
-    uid integer NOT NULL,
-    username character varying(50),
-    realname character varying(100),
-    password character varying(50)
+	uid integer NOT NULL,
+	username character varying(50),
+	realname character varying(100),
+	password character varying(50),
+	address character varying(200),
+	email character varying(100),
+	rating integer,
+	photo text,
+	feedback text
+);
+
+--
+-- Name: reviews; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE reviews (
+	uid integer, 
+	description character varying(500)
 );
 
 
@@ -135,11 +160,11 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_uid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 --
@@ -174,25 +199,25 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY stock (sid, uid, label, price, quantity, category) FROM stdin;
-1	1	Camera	12.9000	3	Electronics
-2	1	Hat	30.0000	1	Clothes
-3	2	Bald Eagle	999.9900	10	Animals
-4	2	Kiwi	49999.9900	3	Animals
-5	3	Snakes and Ladders	1.0000	1	Board Games
-6	3	Monopoly	3.0000	1	Board Games
-7	4	Holy Grail	0.9900	1	Miscellaneous
-8	5	Meaning of Life	42.0000	20	Miscellaneous
-9	5	Cactus	9.9900	3	Plants
-10	5	Iris	9.9900	15	Plants
-11	6	Knives	15.5000	4	Kitchen Appliances
-12	6	Sword	49.9700	8	Miscellaneous
-13	7	Kryptonite	0.5000	100	Miscellaneous
-14	7	S Clothing Patch	5.9900	1000	Clothes
-15	8	Table	10.0000	1	Furniture
-16	9	Small Chair	5.0000	1	Furniture
-17	10	Coffee	4.9900	10	Food and Drinks
-18	10	Muffin	3.5000	10	Food and Drinks
+COPY stock (sid, uid, label, price, quantity, category, photourl, description) FROM stdin;
+1	1	Camera	12.9000	3	Electronics	http://www.bhphotovideo.com/images/categoryImages/desktop/325x325/21008-Mirrorless-System-Cameras.jpg	Boasting a durable waterproof casing, built-in Wi-Fi and a variety of shooting modes, the Camera is the ultimate shooting companion on your next big holiday.
+2	1	Cap	30.0000	1	Clothes	http://cdn.shopify.com/s/files/1/0978/9908/products/hb_darkside_5panelcap_b7987690-e036-406a-a972-a1b434b2122c_large.jpeg?v=1455079401	Keeping it simple, this cap is just what you need this summer. All about quality, comfort and timeless style, this varsity cap has an embroidered detail at the back.
+3	2	Bald Eagle	999.9900	10	Animals	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1	The Bald Eagle is an unforgettable animal. Its white head and tail, eight-foot wingspread, piercing eyes, massive hooked beak and powerful talons make it unmistakable among North American birds.
+4	2	Kiwi	49999.9900	3	Animals	http://www.namastenewzealand.com/wp-content/uploads/2015/08/Rotorua-Rainbow-Springs-Kiwi-Wildlife-Park-350x350.jpg	A flightless bird, about the size of a domestic chicken. Kiwis lay the largest egg in relation to their body size of any species of bird in the world.
+5	3	Snakes and Ladders	1.0000	1	Board Games	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw2951e8c7/hi-res/764054p.jpg?sw=325	This is the classic board game in 3-dimensions. Now when you land on a snake, your marble actually goes down tubes and slide for one or more levels. Livens up the game for everyone. The board is a bit of a construction project at first, and will not fit back in the box after it is setup, but it is a lot more interesting than the usual flat board.
+6	3	Monopoly	3.0000	1	Board Games	http://www.hasbro.com/common/productimages/en_US/93e901b16d4010148bf09efbf894f9d4/E275A053D56FE1124AA2AC1BEF6330E9.jpg	Travel the globe, without the jetlag! Buy up real estate while you travel the world of MONOPOLY. With millions of dollars at your disposal, use your MONOPOLY bank card to grab houses and hotels on six continents! Be a winner AND see the globe with the world’s most popular board game!
+7	4	Holy Grail	0.9900	1	Miscellaneous	http://www.funkleague.com/wp-content/uploads/2015/03/Holy-Grail-300x300.jpg	The Holy Grail is a dish, plate, stone or cup that is part of an important theme of Arthurian literature. According to legend, it has special powers and is designed to provide happiness, eternal youth and food in infinite abundance.
+8	5	Meaning of Life	42.0000	20	Miscellaneous	https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e15/11176219_382128701990934_1983521442_n.jpg	Have you ever wondered what the meaning of life is? Well look no further! You can finally get all the answers you have been looking for. This is not available anywhere else, so buy now!
+9	5	Cactus	9.9900	3	Plants	http://www.womenofchina.cn/res/womenofchina/1301/i.jpg	From Mexico, it grows slowly to around 2 m high (may take a few hundred years!). Large scented yellow flowers in summer. Indoors only, in bright light.
+10	5	Iris	9.9900	15	Plants	http://www.touchofnature.com/Fall%20Pictures/TC%20Dutch%20Iris%20Blue%20Ribbon.png	The word iris is Greek for 'rainbow'. The iris flower meaning are faith, wisdom, peace of mind, friendship and hope. Purple iris is symbolic of wisdom and compliments
+11	6	Knives	15.5000	4	Kitchen Appliances	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg	Set of 5 quality kitchen knives complete with a magnetic wall rack for easy accessability. Each knife is made from top quality, strong stainless steel and features riveted handles.
+12	6	6Sword	49.9700	8	Miscellaneous	http://www.bilttuff.com/images/Butterfly%20Swords.jpg	Butterfly Swords come in pairs that are cleverly nested together so they appear to be one sword not two. When they are drawn, they can be quickly separated and wielded in both hands to make wickedly effective chops, slashes and thrusts.
+13	7	Kryptonite	0.5000	100	Miscellaneous	http://www.fashion-fit.us/ff2016_files/image048.jpg	Kryptonite is a material from the superman fictional universe, specifically the ore form of a radioactive element from Krypton, the home planet of Superman.
+14	7	Scarf	5.9900	1000	Clothes	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg	This scarf is the perfect accessory to keep you warm this Winter. It folds up small but keeps you warm on those cold days.
+15	8	Table	10.0000	1	Furniture	http://www.camlenantiques.com/images/bist_325cab.jpg	Designed for a smaller space, this table has all of the design and functionality of a larger pedestal table, exuding a more casual style. This table can comfortably sit 2 or 3 persons, or can be used as an accent table in a living room or entrance hallway.
+16	9	Small Chair	5.0000	1	Furniture	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw828da71f/hi-res/991174p.jpg?sw=325	Small chair with slats. Made from lightweight beech wood. Easy to clean.
+17	10	Coffee Beans	4.9900	10	Food and Drinks	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg	Creamy and smooth with a nutty finish. Preaparation - washed. Sold in 500g packs.
+18	10	Muffin	3.5000	10	Food and Drinks	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/	Double chocolate chip muffins (4 pieces) filled with a gooey caramel center. Baked with no nuts.
 \.
 
 
@@ -207,25 +232,25 @@ SELECT pg_catalog.setval('stock_sid_seq', 18, true);
 -- Data for Name: transactions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY transactions (tid, sid, uid, type) FROM stdin;
-1	3	1	PURCHASE
-2	1	10	PURCHASE
-3	4	3	PURCHASE
-4	5	4	PURCHASE
-5	14	1	PURCHASE
-6	14	10	PURCHASE
-7	14	8	PURCHASE
-8	18	7	PURCHASE
-9	17	7	PURCHASE
-10	18	11	PURCHASE
-11	11	11	PURCHASE
-12	11	11	PURCHASE
-13	11	11	PURCHASE
-14	11	11	PURCHASE
-15	9	11	PURCHASE
-16	3	11	PURCHASE
-17	17	11	PURCHASE
-18	13	11	PURCHASE
+COPY transactions (tid, sid, uid, type, photourl) FROM stdin;
+1	3	1	PURCHASE	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1
+2	1	9	PURCHASE	http://www.bhphotovideo.com/images/categoryImages/desktop/325x325/21008-Mirrorless-System-Cameras.jpg
+3	4	3	PURCHASE	http://www.namastenewzealand.com/wp-content/uploads/2015/08/Rotorua-Rainbow-Springs-Kiwi-Wildlife-Park-350x350.jpg
+4	5	4	PURCHASE	http://www.brookstone.com/dis/dw/image/v2/AAYH_PRD/on/demandware.static/-/Sites-itemmaster_Brookstone/default/dw2951e8c7/hi-res/764054p.jpg?sw=325
+5	14	1	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+6	14	9	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+7	14	8	PURCHASE	http://www.buyyourties.com/image/cache/byt/2000-SCARFZ/SCARF-Z-4-325x325.jpg
+8	18	7	PURCHASE	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/
+9	17	7	PURCHASE	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg
+10	18	5	PURCHASE	http://static1.squarespace.com/static/544e9769e4b0529748d842f0/t/5463c8f4e4b01221357f7cd3/1415825652388/
+11	11	11	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+12	11	2	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+13	11	10	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+14	11	1	PURCHASE	http://www.briscoes.co.nz/productimages/medium/1/19242_44632_40836.jpg
+15	9	10	PURCHASE	http://www.womenofchina.cn/res/womenofchina/1301/i.jpg
+16	3	10	PURCHASE	http://rlv.zcache.com/eagle_fleece_blanket-r1da8dc7d4f5d4589b9dc8a6edd45bf2d_zkij0_325.jpg?rlvnet=1
+17	17	6	PURCHASE	http://static.wixstatic.com/media/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg/v1/fill/w_325,h_325,q_85,usm_0.66_1.00_0.01/34793e_7b30181368f54448a16cd8f0ef3abc9a.jpg
+18	13	10	PURCHASE	http://www.fashion-fit.us/ff2016_files/image048.jpg
 \.
 
 
@@ -240,18 +265,18 @@ SELECT pg_catalog.setval('transactions_tid_seq', 18, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (uid, username, realname, password) FROM stdin;
-1	admin	Sally Smith	1337
-2	j0nny	John Diggle	password
-3	james	James Green	green
-4	zoo	Monty Python	dinosaur
-5	qwerty	Zoe Curtis	purple
-6	Cambel	Thea Queen	somethingSE
-7	Waities	Kara Danvers	secure
-8	Cam	Camile Jones	12345
-9	grod	Cameron Smith	dfgh
-10	flash	Barry Allen	falsh
-11	arrow	Oliver Queen	arrow
+COPY users (uid, username, realname, password, address, email, rating, photo, feedback) FROM stdin;
+1	admin	Sally Smith	1337	11 Pattie Street	sulkysally@yahoo.com	4	http://img.thesun.co.uk/aidemitlum/archive/00908/woman-280_908421a.jpg	Excellent buyer. A++++++.
+2	j0nny	John Diggle	password	22 Fitzherbert Avenue	digglelove@hotmail.com	3	https://pbs.twimg.com/profile_images/661041286942584832/a5SW7Qz5.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+3	james	James Green	green	9 Evergreen Royale Subd	greenjames@mailme.com	2	https://lh3.googleusercontent.com/-Pcv8Ya-Jij8/AAAAAAAAAAI/AAAAAAAADPY/D4YsBTDXvZU/photo.jpg	Lovely buyer. A pleasure doing business with. 
+4	zoo	Monty Python	dinosaur	3 Rupiah Street	python_guy@gmail.com	1	http://1.bp.blogspot.com/-aeF1Vhzaeck/UQnxO4lKlkI/AAAAAAAAGc0/1ajSxMIqBqc/s1600/SMCARRADINE2.jpg	Terrible buyer! Do not sell anything for this person.
+5	qwerty	Zoe Curtis	purple	Taal Avenue, Quezon City	zoeba@live.com	5	http://tubestatic.orf.at/static/images/site/tube/2016025/orf_zoe_artist-neu.5440160.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+6	Cambel	Thea Queen	something	213 Curly Subd	queen.thea01@yahoo.com	1	http://www.squamartworkshops.com/stuff/contentmgr/files/0/3673c4f957af7e7e4dfc41623132a2c9/image/_resized/30_360_312_thea_bio_pic_june_2013.jpg	Terrible buyer! Do not sell anything for this person.
+7	Waities	Kara Danvers	secure	2 May Street	danvers_kara@hotmail.com	4	https://media2.giphy.com/media/W2OIvtTtKZWHm/200_s.gif	Excellent buyer. A++++++.
+8	Cam	Camile Jones	12345	11 Wilford Boulevard	msjones@hotmail.com	5	http://www.udel.edu/udaily/2011/sep/images/jonescamille.jpg	Excellent buyer. A++++++.
+9	grod	Cameron Smith	dfgh	62 Hewer Crescent	cameronsmith222@live.com	5	https://auctiondesq.imgstg.com/assets/auctiondesq/lots/images/main/CameronSmith2.jpg	Good buyer, prompt payment, valued customer, highly recommended.
+10	flash	Barry Allen	falsh	10 Flash Street	allenbarrygod@mailme.com	3	http://images.mstarsnews.musictimes.com/data/images/full/72932/grant-gustin.jpg?w=600	Good buyer, prompt payment, valued customer, highly recommended.
+11	arrow	Oliver Queen	arrow	16 Hells Kitchen	arrow_guy@hotmail.com	2	https://s-media-cache-ak0.pinimg.com/736x/a0/3f/c9/a03fc90ec7a81332322d2723d972ffdc.jpg	Lovely buyer. A pleasure doing business with. 
 \.
 
 
@@ -275,4 +300,3 @@ SELECT pg_catalog.setval('users_uid_seq', 11, true);
 --
 -- PostgreSQL database dump complete
 --
-

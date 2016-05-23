@@ -9,7 +9,6 @@ html(lang='en')
     title Colenso Database   
     // Bootstrap Core CSS
     link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
     // Custom CSS
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
     //Sliers Style
@@ -22,13 +21,21 @@ html(lang='en')
     script(src='javascripts/slick.min.js')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     link(rel='stylesheet', type='text/css', href='style.css')
+    style(type='text/css').
+        h2{
+        font-size:27px !important;
+        }      
+        body{
+        padding: 0px !important;
+        margin: 0px !important;
+        }
 
  
   block body
     
-    .container-fluid
+    .container-fluid(style='padding:0px;')
       header
-        nav.navbar.navbar-default.navbar-fixed-top
+       .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
             // Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -157,8 +164,8 @@ html(lang='en')
       // Features Section
 
       .row
-        .col-lg-6
-          h2.page-header Categories
+        .col-lg-6(style="margin-top: 10px;padding:0px 30px 30px 30px ;border:1px solid #ccc; border-radius:5px;")
+          h2.page-header(style=" padding:15px; border-radius:3px; margin-top:20px;") Categories
           #pills
             .col-lg-12
                   ul.nav.nav-pills
@@ -169,21 +176,21 @@ html(lang='en')
                     li
                       a(data-toggle='pill', href='#menu2') Cameras
                   .tab-content
-                      #home.tab-pane.fade.in.active
+                      #home.tab-pane.fade.in.active(style="background-color:#F5F5F5;padding:20px;border-radius:5px;margin-top:3px;")
                         p
                         p PC
                         p Apple
-                      #menu1.tab-pane.fade
+                      #menu1.tab-pane.fade(style="background-color:#F5F5F5;padding:20px;border-radius:5px;margin-top:3px;")
                         p
                         p Samsung
                         p Apple
-                      #menu2.tab-pane.fade
+                      #menu2.tab-pane.fade(style="background-color:#F5F5F5;padding:20px;border-radius:5px;margin-top:3px;")
                         p
                         p DSLR
                         p GoPro
       .row
-        .col-lg-12
-          h2.page-header Featured Items
+        .col-lg-12(style="margin-top: 10px;padding:0px 30px 30px 30px ;border:1px solid #ccc; border-radius:5px;")
+          h2.page-header(style="background-color:#f5f5f5; padding:15px; border-radius:3px; margin-top:20px;") Featured Items
           .dave
               .slider-data
                   .multiple-items(style='margin: auto; width: 100%;')
@@ -195,8 +202,8 @@ html(lang='en')
                           a(href='/viewProduct' + "?sid=" + imageSID)
                               img(src= "" + imageURL)
       .row
-        .col-lg-12
-          h2.page-header Top Selling Items
+        .col-lg-12(style="margin-top: 10px;padding:0px 30px 30px 30px ;border:1px solid #ccc; border-radius:5px;")
+          h2.page-header(style="background-color:#f5f5f5; padding:15px; border-radius:3px; margin-top:20px;") Top Selling Items
           .dave
               .slider-data
                   .multiple-items(style='margin: auto; width: 100%;')
@@ -208,8 +215,8 @@ html(lang='en')
                           a(href='/viewProduct' + "?sid=" + imageSID)
                               img(src= "" + imageURL)
       .row
-        .col-lg-12
-          h2.page-header Most Popular Items
+        .col-lg-12(style="margin-top: 10px;padding:0px 30px 30px 30px ;border:1px solid #ccc; border-radius:5px;")
+          h2.page-header(style="background-color:#f5f5f5; padding:15px; border-radius:3px; margin-top:20px;") Most Popular Items
           .dave
               .slider-data
                   .multiple-items(style='margin: auto; width: 100%;')
@@ -220,11 +227,10 @@ html(lang='en')
                           -var imageSID = slider_data[a-1].sid;
                           a(href='/viewProduct' + "?sid=" + imageSID)
                               img(src= "" + imageURL)
-      // /.row
-      // Footer
-      footer
-        .row
-          .col-lg-12
+    .navbar.navbar-default.navbar-bottom(style='width: 100%; padding: 0px !important; margin: 15px 0px 0px 0px !important;')
+      .container
+        p.navbar-text.pull-left © Online Shopping System
+
             
     // /.container
     //SLICK SLIDER

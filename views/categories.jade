@@ -4,20 +4,27 @@ head
   meta(charset='utf-8')
   title  Online Shopping System - Main Project
   link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
 
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
   script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
 
   script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
 
   link(rel='stylesheet', type='text/css', href='style.css')
   script(language='Javascript', src='index.js')
+  style(type='text/css').
+      h2{
+      font-size:27px !important;
+      }      
+      body{
+      padding: 0px !important;
+      margin: 0px !important;
+      }
 
+ 
 block body
-    .container-fluid
+    .container-fluid(style='padding:0px;')
       header
-        nav.navbar.navbar-default.navbar-fixed-top
+       .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
             // Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -33,10 +40,6 @@ block body
               li
                 a(href='/categories') Categories
               li
-                a(href='/createlisting') Create Listing
-              li
-                a(href='/account') Profile
-              li
                form.navbar-form.navbar-right(action = "/shoppingCart")
                 button.btn.btn-default Shopping Cart  
               li
@@ -44,14 +47,16 @@ block body
                 .form-group
                  input.form-control(type='text', placeholder='Search', name = "searchString")
                 button.btn.btn-default(type='submit') Search
-              li(data-toggle='modal', data-target='#loginBox')
-                a(href='#login')
-                  span.ion.ion-person(style='margin-right:5px; font-size:120%;')
-                  | Login
-              li(data-toggle='modal', data-target='#signUpBox', style='cursor:pointer;')
-                a
-                  span.ion.ion-person-add(style='margin-right:5px; font-size:120%;')
-                  | Sign Up
+              if user_id == undefined  
+                <li data-toggle="modal" data-target="#loginBox"><a href="#login"><span style="margin-right:5px; font-size:120%;" class="ion ion-person"></span>Login</a></li>
+                <li data-toggle="modal" data-target="#signUpBox" style="cursor:pointer;"><a><span style="margin-right:5px; font-size:120%;" class="ion ion-person-add"></span>Sign Up</a></li>
+              else 
+                li
+                  a(href='/createListing') Create Listing
+                li
+                  a(href='/account') Profile
+                li
+                  a(href='/removeCookie') Logout
     // Forgot Password Box 
     #forgotPasswordBox.modal
       .modal-dialog

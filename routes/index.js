@@ -18,10 +18,9 @@ var pg = require('pg').native;
 */
 
 
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
-var database = 'postgres://postgres:swen303@localhost:5432/303';
+var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
+//var database = 'postgres://postgres:swen303@localhost:5432/303';
 //var connectionString = 'postgres://localhost/SWEN303';
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -42,6 +41,42 @@ router.get('/', function(req, res, next) {
 	});
 }); 
 
+router.post('/review', function(req, res, next) {
+	pg.connect(database, function(err, client, done){
+			if(err){
+				console.error('Could not connect to the database');
+				console.error(err);
+				return;
+			}
+			console.log('Connected to database');
+			var sid = req.query.sid
+			var user_id = req.cookies.user_id
+			var title = req.body.title
+			var description = req.body.description
+			var username;
+
+
+
+			client.query("SELECT * FROM users WHERE uid = "+user_id+";",
+			function(error, result){
+				console.log(error)
+				console.log(result)
+				username = result.rows[0].username;
+		    
+
+			client.query("INSERT INTO reviews (sid, uid, username, title, description) " +
+				"VALUES("+sid+","+user_id+", '"+username+"','"+title+"', '"+description+"');",
+			function(error, result){
+				done();
+				if(error){
+					console.log(error)
+				}
+				res.redirect('/viewProduct?sid='+sid);	
+		    });
+		    });
+
+	});
+}); 
 
 router.get('/removeCookie', function(req, res){
   res.clearCookie('user_id');
