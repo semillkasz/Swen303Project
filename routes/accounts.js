@@ -52,10 +52,7 @@ module.exports = {
 								console.error(error);
 								return;
 							}
-							// 		var qr = JSON.stringify(result.rows);
-							// var queryResult = JSON.parse(qr);
-							// 		var boughtitem = queryResult[0].photourl;
-							// 		console.log(boughtitem);
+
 							res.render('account', {
 								user_id : req.cookies.user_id,
 								title : 'Buy and Sell',
@@ -68,9 +65,6 @@ module.exports = {
 								itemsForSale : itemsForSale
 							});
 						});
-
-						//console.log(boughtitems);
-						//res.render('account', { title: 'Buy and Sell', realname: u_realname, address: u_address, rating: u_rating, photoSRC: u_photo, slider_data: result.rows});
 					});
 				});
 			}

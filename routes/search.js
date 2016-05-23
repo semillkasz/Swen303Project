@@ -9,7 +9,6 @@ module.exports = {
 				console.error(err);
 				return;
 			}
-			console.log('Connected to database');
 
 			var searchString = req.query.searchString;
 			var categoryResults = [];

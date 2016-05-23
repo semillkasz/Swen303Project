@@ -10,7 +10,6 @@ module.exports = {
         console.error(err);
         return;
       }
-      console.log('Connected to database');
 
       var uid = req.cookies.user_id;
 	  
@@ -20,6 +19,7 @@ module.exports = {
 	  }
 
       client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
+        
 		//Removed map stuff as there should be no duplicates now.
         var cart = result.rows;
 

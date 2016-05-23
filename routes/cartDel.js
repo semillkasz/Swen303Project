@@ -10,7 +10,6 @@ module.exports = {
         console.error(err);
         return;
       }
-      console.log('Connected to database');
 
       var uid = req.cookies.user_id;
       var sid = req.query.sid;

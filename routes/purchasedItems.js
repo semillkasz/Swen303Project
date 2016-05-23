@@ -10,7 +10,6 @@ module.exports = {
         console.error(err);
         return;
       }
-      console.log('Connected to database');
 
       var uid = req.cookies.user_id;
     
@@ -20,11 +19,6 @@ module.exports = {
     }
 
       client.query("SELECT * FROM cart WHERE uid = " + uid + ";", function(error, result){
-
-        // var queryResult = JSON.stringify(result.rows);
-        // var queryResult = JSON.parse(q);
-        
-        //var u_id = current user
 
         var queryResult = result.rows;
         var cart = [];
