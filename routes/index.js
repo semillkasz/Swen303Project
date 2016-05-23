@@ -60,7 +60,10 @@ router.post('/review', function(req, res, next) {
 			var title = req.body.title
 			var description = req.body.description
 			var username;
-
+			if(user_id == undefined){
+				res.redirect('/viewProduct?sid='+sid);	
+				return;
+			}
 
 
 			client.query("SELECT * FROM users WHERE uid = "+user_id+";",
