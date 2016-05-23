@@ -65,7 +65,7 @@ module.exports = {
 						return a.price - b.price;
 					});
 					res.render('search', {
-						title : 'SWEN Shop | Search',
+						title : 'Search',
 						listings : listings,
 						searchString : searchString,
 						user_id : req.cookies.user_id
@@ -78,7 +78,7 @@ module.exports = {
 					});
 					listings.reverse();
 					res.render('search', {
-						title : 'SWEN Shop | Search',
+						title : 'Search',
 						listings : listings,
 						searchString : searchString,
 						user_id : req.cookies.user_id
@@ -86,7 +86,7 @@ module.exports = {
 				} else {
 					//Return all listings
 					res.render('search', {
-						title : 'SWEN Shop | Search',
+						title : 'Search',
 						listings : listings,
 						searchString : searchString,
 						user_id : req.cookies.user_id
