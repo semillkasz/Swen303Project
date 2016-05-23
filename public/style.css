@@ -24,3 +24,8 @@ h3 {
 	padding-top: 0px;
 	padding-bottom: 10px;
 }
+
+#logo{
+	margin-top: -10px;
+	margin-bottom: -15px;
+}

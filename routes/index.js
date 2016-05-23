@@ -141,7 +141,7 @@ router.get('/search', function (req, res) {
 /* GET categories page. */
 router.get('/categories', function (req, res) {
 	res.render('categories', {
-		title : 'SWEN Shop | Categories',
+		title : 'Categories',
 		user_id : req.cookies.user_id
 	});
 });
@@ -149,7 +149,7 @@ router.get('/categories', function (req, res) {
 /* GET create listings page. */
 router.get('/createlisting', function (req, res) {
 	res.render('createlisting', {
-		title : 'SWEN Shop | create listing',
+		title : 'Create Listing',
 		user_id : req.cookies.user_id
 	});
 });
