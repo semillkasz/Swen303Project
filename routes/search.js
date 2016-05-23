@@ -19,7 +19,7 @@ module.exports = {
 				if (error || result == undefined) {
 					console.error('Failed to execute query');
 					res.render('search', {
-						title : 'SWEN Shop | Search',
+						title : 'Search',
 						searchString : searchString,
 						user_id : req.cookies.user_id
 					});
