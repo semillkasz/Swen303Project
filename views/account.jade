@@ -1,46 +1,36 @@
 doctype html
-html
-head
-<<<<<<< HEAD
-  meta(charset='utf-8')
-  title  Online Shopping System - Main Project
-  link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-
-  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
-
-  link(rel='stylesheet', type='text/css', href='style.css')
-  script(language='Javascript', src='index.js')
-=======
+html(lang='en')
+  head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Online Shopping System | Account
+    title Online Shopping System  
     // Bootstrap Core CSS
     link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
     // Custom CSS
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
-    //Sliers Style
-    link(rel='stylesheet', type='text/css', href='stylesheets/slick.css')
-    link(rel='stylesheet', type='text/css', href='stylesheets/slick-theme.css')
     script(src='//code.jquery.com/jquery-1.11.0.min.js')
     script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js')
     script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-    script(src='javascripts/slick.min.js')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     link(rel='stylesheet', type='text/css', href='style.css')
->>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
+    style(type='text/css').
+      h2{
+      font-size:27px !important;
+      }      
+      body{
+      padding: 0px !important;
+      margin: 0px !important;
+      }
 
-block body
+  block body
     
-    .container-fluid
+    .container-fluid(style='padding:0px;')
       header
-        nav.navbar.navbar-default.navbar-fixed-top
+       .navbar.navbar-default.navbar-top(style='width: 100%; padding: 0px !important; margin: 0px 0px 15px 0px !important;')
           .container
             // Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -67,14 +57,21 @@ block body
                 <li data-toggle="modal" data-target="#loginBox"><a href="#login"><span style="margin-right:5px; font-size:120%;" class="ion ion-person"></span>Login</a></li>
                 <li data-toggle="modal" data-target="#signUpBox" style="cursor:pointer;"><a><span style="margin-right:5px; font-size:120%;" class="ion ion-person-add"></span>Sign Up</a></li>
               else 
-                li
-                  a(href='/createListing') Create Listing
-                li
-                  a(href='/account') Profile
-                li
-                  a(href='/wishlist') Wishlist
-                li
-                  a(href='/removeCookie') Logout
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    | Account Options 
+                    b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/createlisting') Create Listing
+                    li
+                      a(href='/wishlist') Wish List
+                    li
+                      a(href='/account') Profile
+                    li
+                      a(href='/removeCookie') Logout
+
+
     // Forgot Password Box 
     #forgotPasswordBox.modal
       .modal-dialog
@@ -222,4 +219,4 @@ block body
     footer.footer
       p © SWEN303 2016
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+ 

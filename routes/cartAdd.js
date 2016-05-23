@@ -16,6 +16,15 @@ module.exports = {
 
 			var uid = req.cookies.user_id;
 
+			var review_data;
+
+
+      		client.query("SELECT * FROM reviews WHERE sid = "+sid+";", function(error, result){
+         
+       			 review_data = result.rows;
+
+     		});
+
 			client.query("SELECT * FROM stock WHERE sid = " + sid + ";", function (error, result) {
 
 				var q = JSON.stringify(result.rows);
@@ -49,7 +58,8 @@ module.exports = {
 							cartBtn : 'Add to Cart',
 							wishlistBtn : 'Add to Wishlist',
 							user_id : req.cookies.user_id,
-							reportMsg : 'This item is already in your shopping cart.'
+							reportMsg : 'This item is already in your shopping cart.',
+							review_data: review_data
 						});
 						return;
 					}
@@ -74,7 +84,8 @@ module.exports = {
 							cartBtn : 'Added to Cart',
 							wishlistBtn : 'Add to Wishlist',
 							user_id : req.cookies.user_id,
-							reportMsg : 'Item added to cart.'
+							reportMsg : 'Item added to cart.',
+							review_data: review_data
 						});
 					});
 				});

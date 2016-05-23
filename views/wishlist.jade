@@ -55,15 +55,19 @@ head
                 <li data-toggle="modal" data-target="#loginBox"><a href="#login"><span style="margin-right:5px; font-size:120%;" class="ion ion-person"></span>Login</a></li>
                 <li data-toggle="modal" data-target="#signUpBox" style="cursor:pointer;"><a><span style="margin-right:5px; font-size:120%;" class="ion ion-person-add"></span>Sign Up</a></li>
               else 
-                li
-                  a(href='/createListing') Create Listing
-                li
-                  a(href='/account') Profile
-                li
-                  a(href='/wishlist') Wishlist
-                li
-                  a(href='/removeCookie') Logout
-    // Forgot Password Box 
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    | Account Options 
+                    b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/createlisting') Create Listing
+                    li
+                      a(href='/wishlist') Wish List
+                    li
+                      a(href='/account') Profile
+                    li
+                      a(href='/removeCookie') Logout
     #forgotPasswordBox.modal
       .modal-dialog
         .modal-content

@@ -20,15 +20,11 @@ is different. Will be eventually replaced with the postgres database
 on ECS servers.
  */
 
-<<<<<<< HEAD
+
 
 var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP"; 
 //var database = 'postgres://postgres:swen303@localhost:5432/303';
-=======
-//var database = "postgres://newtondavi2:dave@depot:5432/SWEN303SHOP";
-var database = 'postgres://postgres:swen303@localhost:5432/303';
->>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
-//var connectionString = 'postgres://localhost/SWEN303';
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -50,7 +46,7 @@ router.get('/', function (req, res, next) {
 		});
 
 	});
-<<<<<<< HEAD
+
 }); 
 
 router.post('/review', function(req, res, next) {
@@ -89,9 +85,8 @@ router.post('/review', function(req, res, next) {
 
 	});
 }); 
-=======
-});
->>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
+
+
 
 router.get('/removeCookie', function (req, res) {
 	res.clearCookie('user_id');

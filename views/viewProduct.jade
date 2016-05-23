@@ -57,14 +57,19 @@ block body
                 <li data-toggle="modal" data-target="#loginBox"><a href="#login"><span style="margin-right:5px; font-size:120%;" class="ion ion-person"></span>Login</a></li>
                 <li data-toggle="modal" data-target="#signUpBox" style="cursor:pointer;"><a><span style="margin-right:5px; font-size:120%;" class="ion ion-person-add"></span>Sign Up</a></li>
               else 
-                li
-                  a(href='/createListing') Create Listing
-                li
-                  a(href='/account') Profile
-                li
-                  a(href='/wishlist') Wishlist
-                li
-                  a(href='/removeCookie') Logout
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    | Account Options 
+                    b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/createlisting') Create Listing
+                    li
+                      a(href='/wishlist') Wish List
+                    li
+                      a(href='/account') Profile
+                    li
+                      a(href='/removeCookie') Logout
     // Forgot Password Box 
     #forgotPasswordBox.modal
       .modal-dialog
@@ -215,8 +220,6 @@ block body
           p Sorry this item is no longer available
          else
 
-          form(action='', method='post') 
-           button.btn.btn-default #{cartBtn}
 
           if user_id == undefined
            form(action='/viewProduct?sid='+sid, method='post') 

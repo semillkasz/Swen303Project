@@ -173,6 +173,18 @@ CREATE SEQUENCE users_uid_seq
 	NO MAXVALUE
 	CACHE 1;
 
+--
+-- Name: reviews; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE reviews (
+	sid integer,
+	uid integer, 
+	username character varying(50),
+	title character varying(40),
+	description character varying(500)
+);
+
 
 ALTER TABLE ONLY wishlist ALTER COLUMN sid SET DEFAULT nextval('wishlist_sid_seq'::regclass);	
 	

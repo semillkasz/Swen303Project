@@ -32,25 +32,6 @@ module.exports = {
 				var p_category = queryResult[0].category;
 				var p_quantity = queryResult[0].quantity;
 
-<<<<<<< HEAD
-  				//Testing
-  				console.log(p_label);
-  				console.log(p_details);
-  				console.log(p_price);
-  				console.log(p_url);
-  				console.log(p_category);
-  				console.log(p_quantity);
-          console.log(review_data);
-
-  				if (p_quantity <= 5 && p_quantity > 1){
-  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, quantity: 'Only ' + p_quantity + ' left!', cartBtn: 'Add to Cart', sid: sid, review_data : review_data});
-  				}
-          else if (p_quantity == 0){
-            res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, noStock: true, sid: sid,review_data : review_data });
-          }
-  				else {
-  					res.render('viewProduct', { user_id : req.cookies.user_id, title: p_label, price: p_price, category: p_category, product_details: p_details, photoSRC: p_url, cartBtn: 'Add to Cart', sid: sid, review_data : review_data});
-=======
 				//Testing
 				console.log(p_label);
 				console.log(p_details);
@@ -70,7 +51,8 @@ module.exports = {
 						photoSRC : p_url,
 						quantity : 'Only ' + p_quantity + ' left!',
 						cartBtn : 'Add to Cart',
-						wishlistBtn : 'Add to Wishlist'
+						wishlistBtn : 'Add to Wishlist',
+            review_data : review_data
 					});
 				} else if (p_quantity == 0) {
 					res.render('viewProduct', {
@@ -81,7 +63,8 @@ module.exports = {
 						category : p_category,
 						product_details : p_details,
 						photoSRC : p_url,
-						noStock : true
+						noStock : true,
+            review_data : review_data
 					});
 				} else {
 					res.render('viewProduct', {
@@ -93,9 +76,10 @@ module.exports = {
 						product_details : p_details,
 						photoSRC : p_url,
 						cartBtn : 'Add to Cart',
-						wishlistBtn : 'Add to Wishlist'
+						wishlistBtn : 'Add to Wishlist',
+            review_data : review_data
 					});
->>>>>>> 2cf86661f72dd9fbfaa2e50eb6cb47389dc778d3
+
 				}
 			});
 		});

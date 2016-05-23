@@ -33,6 +33,14 @@ module.exports = {
 				var p_url = queryResult[0].photourl;
 				var p_category = queryResult[0].category;
 				var p_quantity = queryResult[0].quantity
+				var review_data;
+
+
+      					client.query("SELECT * FROM reviews WHERE sid = "+sid+";", function(error, result){
+         
+       						 review_data = result.rows;
+
+     					});
 
 					//Check for duplicates
 					client.query("SELECT * FROM wishlist WHERE uid = " + uid + " AND sid_item = " + sid + ";",
@@ -42,6 +50,9 @@ module.exports = {
 							console.error(error);
 							return;
 						}
+
+						 
+    
 
 						//If duplicate found, don't add to wish list
 						if (result.rows.length > 0) {
@@ -55,10 +66,12 @@ module.exports = {
 								cartBtn : 'Add to Cart',
 								wishlistBtn : 'Add to Wishlist',
 								user_id : req.cookies.user_id,
-								reportMsg : 'This item is already on your wish list.'
+								reportMsg : 'This item is already on your wish list.',
+								review_data : review_data
 							});
 							return;
 						}
+
 
 						client.query("INSERT INTO wishlist (uid, sid_item, label, photourl, price) " +
 							"VALUES('" + uid + "'  , '" + sid + "', '" + p_label + "', '" + p_url + "', '" + p_price + "');",
@@ -80,7 +93,8 @@ module.exports = {
 								cartBtn : 'Add to Cart',
 								wishlistBtn : 'Added to Wishlist',
 								user_id : req.cookies.user_id,
-								reportMsg : 'Item added to wish list.'
+								reportMsg : 'Item added to wish list.',
+								review_data : review_data
 							});
 						});
 					});
