@@ -6,7 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Online Shopping System  
+    title Eazee Electronics View Product 
     // Bootstrap Core CSS
     link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
     // Custom CSS
@@ -230,7 +230,7 @@ block body
 
           if user_id == undefined
            form(action='/viewProduct?sid='+sid, method='post') 
-            button.btn.btn-default.disabled #{cartBtn}
+            button.btn.btn-default.disabled(type='button') #{cartBtn}
            p Log in or create an account to add items to the cart.
           else
            form(action='/viewProduct?sid='+sid, method='post') 
